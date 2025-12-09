@@ -275,7 +275,7 @@ export default function Home() {
             ].map((question, idx) => (
               <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 px-8 py-8 flex items-center justify-between hover:shadow-lg hover:border-gray-300 transition-all duration-200 cursor-pointer group" data-node-id={`1715:${671 + idx * 6}`}>
                 <div className="flex gap-6 items-center w-full">
-                  <div className="flex-shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:rotate-90">
+                  <div className="shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:rotate-90">
                     <div className="rotate-180 scale-y-[-1]">
                       <img alt="Expand" className="size-7" src={img1} />
                     </div>
