@@ -1,200 +1,124 @@
-const imgPrivateInvestigatorSittingDeskWorkingLaptopAgencyNightConcentratedAfricanAmericanCriminalistSearchingCrimeCaseFileComputerPoliceDetectiveOffice1 =
-  "https://www.figma.com/api/mcp/asset/f0de0eee-0f8d-458b-a4b6-ee2e906e693b";
-const imgSubtract = "https://www.figma.com/api/mcp/asset/63235648-89c4-4cb9-bb90-0885a30c984f";
-const imgVector = "https://www.figma.com/api/mcp/asset/55d933a0-8091-4eb4-9ddf-dfcf0157800f";
-const imgArrow = "https://www.figma.com/api/mcp/asset/669260e9-be2f-448e-ab50-9178088c8186";
+"use client";
 
-type RectangleProps = {
-  className?: string;
-};
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-function RememberMeCheckbox({ className }: RectangleProps) {
-  return (
-    <div data-node-id="1768:8842" className={className}>
-      <div className="absolute inset-0 rounded-[4px] bg-white border border-black" />
-    </div>
-  );
-}
+// Image assets from Figma - Auth Choice Screen
+const imgPrivateInvestigator =
+  "https://www.figma.com/api/mcp/asset/ae27070c-db88-4a5a-ad53-c466ddbc310f";
+const imgLogo = "https://www.figma.com/api/mcp/asset/de6e04cb-5b34-48cf-a0b6-8f8154a056c0";
+const imgBackArrow = "https://www.figma.com/api/mcp/asset/5d10e848-4088-46db-950b-09237731f30a";
+const imgArrowButton = "https://www.figma.com/api/mcp/asset/9fecdd93-b9be-42ec-80f7-a6631e840015";
 
-function LoginHeader() {
-  return (
-    <header
-      className="flex items-center justify-between w-full text-white"
-      data-node-id="1768:8655"
-    >
-      <div className="flex items-center gap-5">
-        <div
-          className="relative w-[52px] h-[52px]"
-          data-name="Subtract"
-          data-node-id="1734:6606"
-        >
-          <img alt="Axiom Tracker" className="w-full h-full" src={imgSubtract} />
-        </div>
-        <p className="font-unbounded text-2xl" data-node-id="1734:6609">
-          Axiom Tracker
-        </p>
-      </div>
+export default function LoginChoicePage() {
+  const router = useRouter();
 
-      <a
-        href="/"
-        className="flex items-center gap-3 text-base sm:text-lg font-geist"
-        data-node-id="1734:6610"
-      >
-        <div
-          className="relative w-[19px] h-[17px]"
-          data-name="Vector"
-          data-node-id="1734:6611"
-        >
-          <img alt="Back" className="w-full h-full" src={imgVector} />
-        </div>
-        <span data-node-id="1734:6612">Back to Website</span>
-      </a>
-    </header>
-  );
-}
-
-function HeroText() {
-  return (
-    <div
-      className="relative mt-auto mb-16 max-w-md text-white"
-      data-name="menu"
-      data-node-id="1734:7054"
-    >
-      <p
-        className="font-unbounded font-semibold text-3xl leading-[1.4]"
-        data-node-id="1726:6194"
-      >
-        Never Miss Your Credential Renewal Again.
-      </p>
-      <div
-        className="absolute -right-4 -bottom-6 flex items-center justify-center"
-        data-node-id="1726:6210"
-      >
-        <button
-          type="button"
-          className="bg-white rounded-2xl p-4 flex items-center justify-center shadow-md"
-          aria-label="Learn more"
-        >
-          <div
-            className="relative w-9 h-9"
-            data-name="arrow-down-right-01-round"
-            data-node-id="1726:6201"
-          >
-            <img alt="Arrow" className="w-full h-full" src={imgArrow} />
-          </div>
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default function LoginPage() {
   return (
     <main
-      className="min-h-screen w-full bg-white text-black flex"
-      data-name="MacBook Pro 16' - 3"
-      data-node-id="1734:6488"
+      className="min-h-screen w-full bg-white flex flex-col lg:flex-row"
+      data-node-id="1726:6131"
     >
-      {/* Left side image + overlay content */}
-      <section className="relative w-full lg:w-1/2 h-[60vh] lg:h-auto overflow-hidden">
+      {/* Left side - Image with overlay and hero content */}
+      <section className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen overflow-hidden flex flex-col">
         <img
-          alt="Person working on laptop"
-          src={imgPrivateInvestigatorSittingDeskWorkingLaptopAgencyNightConcentratedAfricanAmericanCriminalistSearchingCrimeCaseFileComputerPoliceDetectiveOffice1}
+          alt="Professional working on laptop"
+          src={imgPrivateInvestigator}
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/70" />
+        
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/60" />
 
-        <div className="relative z-10 flex flex-col h-full px-8 sm:px-12 lg:px-16 pt-8 pb-12">
-          <LoginHeader />
-          <HeroText />
+        {/* Content overlay */}
+        <div className="relative z-10 flex flex-col h-full px-6 sm:px-8 lg:px-12 pt-6 pb-8">
+          {/* Header */}
+          <header className="flex items-center justify-between w-full text-white mb-auto">
+            <div className="flex items-center gap-2 lg:gap-4">
+              <div className="relative w-10 h-10 lg:w-12 lg:h-12 flex-shrink-0">
+                <img 
+                  alt="Axiom Tracker Logo" 
+                  className="w-full h-full object-contain" 
+                  src={imgLogo} 
+                />
+              </div>
+              <p className="font-unbounded font-semibold text-lg lg:text-2xl">
+                Axiom Tracker
+              </p>
+            </div>
+
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-xs sm:text-sm lg:text-base font-montserrat font-medium text-white hover:text-gray-200 transition-colors whitespace-nowrap"
+            >
+              <div className="relative w-4 h-3 lg:w-5 lg:h-4 flex-shrink-0">
+                <img alt="Back Arrow" className="w-full h-full object-contain" src={imgBackArrow} />
+              </div>
+              <span>Back to Website</span>
+            </Link>
+          </header>
+
+          {/* Hero Text Section */}
+          <div className="relative max-w-sm">
+            <div className="flex flex-col gap-4">
+              <p className="font-unbounded font-bold text-2xl lg:text-4xl text-white leading-tight">
+                Never Miss Your Credential Renewal Again.
+              </p>
+              
+              {/* Arrow button */}
+              <button
+                type="button"
+                className="bg-white rounded-lg lg:rounded-xl w-fit p-2 lg:p-3 flex items-center justify-center hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95"
+                aria-label="Learn more"
+              >
+                <div className="relative w-5 h-5 lg:w-7 lg:h-7 scale-y-[-100%]">
+                  <img alt="Arrow Down" className="w-full h-full object-contain" src={imgArrowButton} />
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Right side login form */}
-      <section className="w-full lg:w-1/2 flex items-center justify-center px-6 sm:px-10 lg:px-16 py-12">
-        <div className="w-full max-w-xl space-y-10" data-node-id="1734:6501">
-          <div className="space-y-4" data-node-id="1734:6227">
-            <h1 className="font-unbounded text-3xl font-semibold text-black">
-              Welcome Back
+      {/* Right side - Choice Buttons */}
+      <section className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 sm:px-8 lg:px-12 py-8 lg:py-0 bg-white">
+        <div className="w-full max-w-md space-y-6 lg:space-y-8">
+          
+          {/* Welcome Text */}
+          <div className="space-y-3 text-center">
+            <h1 className="font-unbounded font-bold text-3xl lg:text-5xl text-black">
+              Hi Welcome to
+              <br />
+              Axiom Tracker
             </h1>
-            <p className="font-montserrat text-lg text-black/80">
-              Sign in to manage your Certificate &amp; License Dashboard.
-            </p>
           </div>
 
-          <form className="space-y-8" data-node-id="1734:6237">
-            {/* Email */}
-            <div className="space-y-3">
-              <label
-                htmlFor="email"
-                className="block font-montserrat text-base text-black"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email address"
-                className="w-full rounded-lg bg-[#f3f3f3] px-8 py-5 text-base font-montserrat placeholder:text-[#7c7c7c] focus:outline-none focus:ring-2 focus:ring-black"
-              />
-            </div>
-
-            {/* Password */}
-            <div className="space-y-3">
-              <label
-                htmlFor="password"
-                className="block font-montserrat text-base text-black"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="************"
-                className="w-full rounded-lg bg-[#f3f3f3] px-8 py-5 text-base font-montserrat placeholder:text-[#7c7c7c] focus:outline-none focus:ring-2 focus:ring-black"
-              />
-            </div>
-
-            {/* Remember / Forgot */}
-            <div className="flex items-center justify-between text-sm font-montserrat">
-              <label className="flex items-center gap-3 cursor-pointer">
-                <span className="relative w-5 h-5">
-                  <RememberMeCheckbox className="relative w-full h-full" />
-                  <input
-                    type="checkbox"
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                    aria-label="Remember me"
-                  />
-                </span>
-                <span>Remember Me</span>
-              </label>
-
-              <a
-                href="#"
-                className="text-sm font-semibold text-black hover:underline"
-              >
-                Forgot Password?
-              </a>
-            </div>
-
-            {/* Submit button */}
-            <button
-              type="submit"
-              className="mt-4 w-full rounded-2xl bg-black py-5 text-center font-montserrat text-lg font-semibold text-white hover:bg-neutral-900 transition-colors"
+          {/* Action Buttons */}
+          <div className="flex flex-col gap-5 lg:gap-7 w-full">
+            {/* Login Button */}
+            <Link
+              href="/login/signin"
+              className="bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 rounded-lg lg:rounded-xl px-6 lg:px-8 py-4 lg:py-5 flex items-center justify-center"
             >
-              Log in
-            </button>
+              <p className="font-unbounded font-semibold text-xl lg:text-2xl text-black">
+                Login
+              </p>
+            </Link>
 
-            {/* Footer text */}
-            <p className="pt-2 text-center text-sm font-montserrat text-black/80">
-              Don&apos;t have an account?{' '}
-              <a href="#" className="font-semibold hover:underline">
-                Sign up here
-              </a>
-            </p>
-          </form>
+            {/* Create Account Button */}
+            <Link
+              href="/login/signup"
+              className="bg-black hover:bg-gray-900 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 rounded-lg lg:rounded-xl px-6 lg:px-8 py-4 lg:py-5 flex items-center justify-center"
+            >
+              <p className="font-unbounded font-semibold text-xl lg:text-2xl text-white">
+                Create Account
+              </p>
+            </Link>
+          </div>
+
+          {/* Powered by text */}
+          <p className="text-center font-montserrat text-sm lg:text-base text-gray-600 mt-6">
+            Powered by AxiomBlack
+          </p>
         </div>
       </section>
     </main>
