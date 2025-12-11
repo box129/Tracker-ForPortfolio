@@ -63,7 +63,7 @@ export default function SigninPage() {
             <div className="flex items-center gap-2 lg:gap-4">
               <div className="relative w-10 h-10 lg:w-12 lg:h-12 shrink-0">
                 <img 
-                  alt="Axiom Tracker Logo" 
+                  alt="Seun Tracker Logo" 
                   className="w-full h-full object-contain" 
                   src={imgLogo} 
                 />

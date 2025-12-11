@@ -53,16 +53,16 @@ export default function SettingsPage() {
     lastName: '',
     email: '',
     role: '',
-    department: 'axiomblack.com',
+    department: 'seuntracker.com',
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
 
   const [companyForm, setCompanyForm] = useState<CompanyFormData>({
-    companyName: 'AxiomBlack',
+    companyName: 'Seun Tracker',
     companyType: 'Construction',
-    companyWebsite: 'axiomblack.com',
+    companyWebsite: 'seuntracker.com',
     numberOfEmployees: '1-10',
     state: '',
     country: '',
@@ -181,7 +181,7 @@ export default function SettingsPage() {
                         <span className="font-montserrat font-normal text-white text-sm md:text-base">JA</span>
                       </div>
                       <div>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black">jalalade@axiomblack.com</p>
+                        <p className="font-montserrat font-normal text-xs md:text-sm text-black">jalalade@seuntracker.com</p>
                         <p className="font-montserrat font-normal text-xs md:text-sm text-black mt-2 md:mt-3">Admin</p>
                       </div>
                     </div>

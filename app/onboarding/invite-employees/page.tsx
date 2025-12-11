@@ -78,7 +78,7 @@ export default function InviteEmployeesPage() {
         <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-12 w-full z-10">
           <div className="flex items-center gap-5">
             <img src={imgLogo} alt="Logo" className="w-12 h-12" />
-            <span className="text-white font-unbounded font-normal text-2xl">Axiom Tracker</span>
+            <span className="text-white font-unbounded font-normal text-2xl">Seun Tracker</span>
           </div>
           <Link
             href="/"
