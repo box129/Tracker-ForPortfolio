@@ -20,6 +20,15 @@ import { useState } from 'react';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMobileMenuOpen(false); // Close mobile menu after clicking
+    }
+  };
 
   return (
     <div className="bg-white relative w-full overflow-hidden" data-name="Axiomtracker" data-node-id="1706:7231">
@@ -31,15 +40,15 @@ export default function Home() {
           </div>
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-6 items-center">
-            <div className="border border-black rounded-full px-8 md:px-10 py-2 md:py-2.5 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
+            <button onClick={() => scrollToSection('hero')} className="border border-black rounded-full px-8 md:px-10 py-2 md:py-2.5 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
               <p className="font-montserrat font-medium text-base md:text-lg text-center">Home</p>
-            </div>
-            <div className="border border-black rounded-full px-8 md:px-10 py-2 md:py-2.5 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
+            </button>
+            <button onClick={() => scrollToSection('features')} className="border border-black rounded-full px-8 md:px-10 py-2 md:py-2.5 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
               <p className="font-montserrat font-medium text-base md:text-lg text-center">Features</p>
-            </div>
-            <div className="border border-black rounded-full px-6 md:px-8 py-2 md:py-2.5 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
+            </button>
+            <button onClick={() => scrollToSection('faqs')} className="border border-black rounded-full px-6 md:px-8 py-2 md:py-2.5 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer">
               <p className="font-montserrat font-medium text-base md:text-lg text-center">FAQs</p>
-            </div>
+            </button>
           </div>
         </div>
         
@@ -48,7 +57,7 @@ export default function Home() {
           <a href="/login" className="border border-black rounded-xl md:rounded-2xl px-6 md:px-10 py-3 md:py-5.5 transition-all duration-200 hover:bg-black hover:text-white cursor-pointer min-h-[44px] flex items-center justify-center">
             <p className="font-montserrat font-medium text-base md:text-lg text-center">Login</p>
           </a>
-          <a href="#get-started" className="bg-black rounded-xl md:rounded-2xl px-6 md:px-10 py-3 md:py-5.5 transition-all duration-200 hover:bg-gray-800 hover:shadow-lg cursor-pointer min-h-[44px] flex items-center justify-center">
+          <a href="/login" className="bg-black rounded-xl md:rounded-2xl px-6 md:px-10 py-3 md:py-5.5 transition-all duration-200 hover:bg-gray-800 hover:shadow-lg cursor-pointer min-h-[44px] flex items-center justify-center">
             <p className="font-montserrat font-medium text-base md:text-lg text-white text-center">Get Started</p>
           </a>
         </div>
@@ -69,20 +78,20 @@ export default function Home() {
       {mobileMenuOpen && (
         <div className="sm:hidden absolute top-[88px] left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-40 animate-slideDown">
           <div className="flex flex-col p-4 space-y-3">
-            <div className="border border-black rounded-full px-6 py-3 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer text-center">
+            <button onClick={() => scrollToSection('hero')} className="border border-black rounded-full px-6 py-3 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer text-center w-full">
               <p className="font-montserrat font-medium text-base">Home</p>
-            </div>
-            <div className="border border-black rounded-full px-6 py-3 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer text-center">
+            </button>
+            <button onClick={() => scrollToSection('features')} className="border border-black rounded-full px-6 py-3 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer text-center w-full">
               <p className="font-montserrat font-medium text-base">Features</p>
-            </div>
-            <div className="border border-black rounded-full px-6 py-3 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer text-center">
+            </button>
+            <button onClick={() => scrollToSection('faqs')} className="border border-black rounded-full px-6 py-3 hover:bg-black hover:text-white transition-all duration-200 cursor-pointer text-center w-full">
               <p className="font-montserrat font-medium text-base">FAQs</p>
-            </div>
+            </button>
             <div className="border-t border-gray-200 pt-3 space-y-3">
               <a href="/login" className="block border border-black rounded-xl px-6 py-3 transition-all duration-200 hover:bg-black hover:text-white cursor-pointer text-center">
                 <p className="font-montserrat font-medium text-base">Login</p>
               </a>
-              <a href="#get-started" className="block bg-black rounded-xl px-6 py-3 transition-all duration-200 hover:bg-gray-800 cursor-pointer text-center">
+              <a href="/login" className="block bg-black rounded-xl px-6 py-3 transition-all duration-200 hover:bg-gray-800 cursor-pointer text-center">
                 <p className="font-montserrat font-medium text-base text-white">Get Started</p>
               </a>
             </div>
@@ -91,7 +100,7 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <section className="relative w-full bg-black overflow-hidden" data-node-id="1715:873">
+      <section id="hero" className="relative w-full bg-black overflow-hidden" data-node-id="1715:873">
         <div className="absolute inset-0 overflow-hidden">
           <img alt="Hero Background" className="w-full h-full object-cover opacity-100" src={imgFreepikGenrateAnImageThatExplainsmartCertificateTra359761} />
           <div className="absolute inset-0 bg-black/20" />
@@ -116,11 +125,11 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center w-full justify-center mt-4" data-node-id="1712:500">
-              <button className="bg-white rounded-3xl px-6 sm:px-8 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px] w-full sm:w-auto" data-node-id="1712:501">
+              <a href="/login" className="bg-white rounded-3xl px-6 sm:px-8 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px] w-full sm:w-auto" data-node-id="1712:501">
                 <p className="font-montserrat font-semibold text-base sm:text-lg text-black">Get Started</p>
-              </button>
+              </a>
               <div className="flex items-center gap-2 w-full sm:w-auto" data-node-id="1712:503">
-                <button className="bg-white rounded-3xl px-6 sm:px-8 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px] flex-1 sm:flex-initial" data-node-id="1712:504">
+                <button onClick={() => scrollToSection('how-it-works')} className="bg-white rounded-3xl px-6 sm:px-8 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px] flex-1 sm:flex-initial" data-node-id="1712:504">
                   <p className="font-montserrat font-semibold text-base sm:text-lg text-black">Learn How it Works</p>
                 </button>
                 <button className="bg-white rounded-3xl px-3 sm:px-4 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px]" data-node-id="1712:506">
@@ -161,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="w-full px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 bg-white" data-node-id="1717:880">
+      <section id="how-it-works" className="w-full px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 bg-white" data-node-id="1717:880">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-14 md:mb-16" data-node-id="1714:637">
@@ -237,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="w-full bg-black py-12 sm:py-14 md:py-16 px-4 sm:px-6 md:px-8" data-node-id="1714:635">
+      <section id="features" className="w-full bg-black py-12 sm:py-14 md:py-16 px-4 sm:px-6 md:px-8" data-node-id="1714:635">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="space-y-5 sm:space-y-7 mb-12 sm:mb-14 md:mb-16 text-center" data-node-id="1714:647">
@@ -298,7 +307,7 @@ export default function Home() {
       </div>
 
       {/* FAQs Section */}
-      <section className="w-full px-8 py-20 bg-white" data-node-id="1715:703">
+      <section id="faqs" className="w-full px-8 py-20 bg-white" data-node-id="1715:703">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12 space-y-4" data-node-id="1811:1931">
@@ -311,20 +320,44 @@ export default function Home() {
           {/* FAQ Items */}
           <div className="space-y-5">
             {[
-              "How does Axiom Tracker prevent certificate expiries?",
-              "Can Axiom Tracker integrate with our existing HR systems?",
-              "Is our certificate data secure?",
-              "What types of certificates can Axiom Tracker manage?"
-            ].map((question, idx) => (
-              <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 px-8 py-8 flex items-center justify-between hover:shadow-lg hover:border-gray-300 transition-all duration-200 cursor-pointer group" data-node-id={`1715:${671 + idx * 6}`}>
-                <div className="flex gap-6 items-center w-full">
-                  <div className="shrink-0 flex items-center justify-center transition-transform duration-200 group-hover:rotate-90">
-                    <div className="rotate-180 scale-y-[-1]">
-                      <img alt="Expand" className="size-7" src={img1} />
+              {
+                question: "How does Axiom Tracker prevent certificate expiries?",
+                answer: "Axiom Tracker uses intelligent automation to monitor all your certificates and sends customizable alerts at multiple intervals before expiration. You can set up notification schedules (e.g., 90, 60, 30, and 7 days before expiry), configure escalation chains to notify supervisors if renewals aren't completed, and receive alerts via email, SMS, or in-app notifications. Our dashboard also provides a real-time view of all upcoming expirations, so nothing slips through the cracks."
+              },
+              {
+                question: "Can Axiom Tracker integrate with our existing HR systems?",
+                answer: "Yes! Axiom Tracker offers seamless integration with popular HR and workforce management systems including BambooHR, Workday, ADP, and SAP SuccessFactors. We also provide a robust REST API for custom integrations, support bulk CSV imports for easy data migration, and offer SSO (Single Sign-On) integration with Azure AD, Okta, and Google Workspace. Our team can help you set up integrations during onboarding."
+              },
+              {
+                question: "Is our certificate data secure?",
+                answer: "Absolutely. Security is our top priority. All data is encrypted in transit (TLS 1.3) and at rest (AES-256 encryption). We're SOC 2 Type II certified and fully GDPR compliant. Our infrastructure is hosted on enterprise-grade cloud servers with 99.9% uptime SLA, regular security audits and penetration testing, role-based access controls (RBAC) to limit data access, and comprehensive audit logs of all system activities. We also offer custom data retention policies to meet your compliance requirements."
+              },
+              {
+                question: "What types of certificates can Axiom Tracker manage?",
+                answer: "Axiom Tracker can manage virtually any type of certificate or credential, including: Safety certifications (OSHA, First Aid, CPR), Professional licenses (medical, legal, engineering), Training certificates (forklift, confined space, hazmat), Industry-specific credentials (food safety, security clearances), Educational certifications (degrees, continuing education), Equipment certifications (crane operator, heavy machinery), and Insurance certificates (liability, workers comp). Our AI-powered OCR can automatically extract expiration dates and relevant details from most certificate formats."
+              }
+            ].map((faq, idx) => (
+              <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-200" data-node-id={`1715:${671 + idx * 6}`}>
+                <button
+                  onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                  className="w-full px-8 py-8 flex items-center justify-between cursor-pointer group"
+                >
+                  <div className="flex gap-6 items-center w-full">
+                    <div className={`shrink-0 flex items-center justify-center transition-transform duration-200 ${openFaqIndex === idx ? 'rotate-90' : ''}`}>
+                      <div className="rotate-180 scale-y-[-1]">
+                        <img alt="Expand" className="size-7" src={img1} />
+                      </div>
                     </div>
+                    <p className="font-unbounded font-semibold text-xl sm:text-2xl text-gray-700 group-hover:text-black transition-colors duration-200 text-left">{faq.question}</p>
                   </div>
-                  <p className="font-unbounded font-semibold text-xl sm:text-2xl text-gray-700 group-hover:text-black transition-colors duration-200">{question}</p>
-                </div>
+                </button>
+                {openFaqIndex === idx && (
+                  <div className="px-8 pb-8 pl-20 animate-fadeIn">
+                    <p className="font-geist font-normal text-base sm:text-lg text-gray-700 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -346,9 +379,9 @@ export default function Home() {
             Join 500+ companies that trust Axiom Tracker to manage their certificates and stay compliant.
           </p>
           <div className="flex flex-col sm:flex-row gap-2 items-center" data-node-id="1715:705">
-            <button className="bg-white rounded-3xl px-10 py-5 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95" data-node-id="1715:706">
+            <a href="/login" className="bg-white rounded-3xl px-10 py-5 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95" data-node-id="1715:706">
               <p className="font-montserrat font-bold text-lg text-black">Get Started</p>
-            </button>
+            </a>
             <div className="flex items-center justify-center">
               <div className="scale-y-[-1]">
                 <button className="bg-white rounded-3xl px-6 py-5 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95">
@@ -383,10 +416,10 @@ export default function Home() {
             <div className="flex flex-col gap-6" data-node-id="1715:837">
               <p className="font-semibold text-xl text-white">QUICK LINKS</p>
               <div className="flex flex-col gap-4 font-montserrat font-medium text-lg text-white" data-node-id="1715:839">
-                <p className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200">Home</p>
-                <p className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200">Features</p>
-                <p className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200">FAQs</p>
-                <p className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200">Contact</p>
+                <button onClick={() => scrollToSection('hero')} className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 text-left">Home</button>
+                <button onClick={() => scrollToSection('features')} className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 text-left">Features</button>
+                <button onClick={() => scrollToSection('faqs')} className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 text-left">FAQs</button>
+                <a href="mailto:hello@axiomtracker.com" className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 block">Contact</a>
               </div>
             </div>
 
