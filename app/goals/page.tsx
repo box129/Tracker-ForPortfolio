@@ -1,13 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
 
-// Header icons (SVG Data URIs)
-const iconNotification = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
-const iconDropdown = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
-const iconLogout = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+
+// Page icons (SVG Data URIs)
 
 // Page icons (SVG Data URIs)
 const iconSearch = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
@@ -65,8 +63,6 @@ interface FormData {
 }
 
 export default function GoalsPage() {
-  const router = useRouter();
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Status');
@@ -77,7 +73,7 @@ export default function GoalsPage() {
   const [toastMessage, setToastMessage] = useState('');
   const [, setToastType] = useState<'success' | 'error'>('success');
   const [showActionMenu, setShowActionMenu] = useState<string | null>(null);
-  const userMenuRef = useRef<HTMLDivElement>(null);
+
   const [formData, setFormData] = useState<FormData>({
     goalType: '',
     targetValue: '',
@@ -89,10 +85,6 @@ export default function GoalsPage() {
     priority: 'Medium',
     additionalNotes: '',
   });
-
-  const handleLogout = () => {
-    router.push('/login');
-  };
 
   // Prevent body scroll when sidebar is open on mobile
   useEffect(() => {
@@ -106,22 +98,7 @@ export default function GoalsPage() {
     };
   }, [sidebarOpen]);
 
-  // Close user menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setUserMenuOpen(false);
-      }
-    };
 
-    if (userMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [userMenuOpen]);
 
   const filteredGoals = goalsData.filter(goal => {
     const matchesSearch = goal.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -191,73 +168,7 @@ export default function GoalsPage() {
       {/* MAIN CONTENT */}
       <div className="flex-1 md:ml-80 w-full">
         {/* HEADER */}
-        <header className="bg-white border-b border-[#e6e6e6] px-4 md:px-10 py-4 md:py-7 flex items-center justify-between shadow-sm sticky top-0 z-30">
-          <div className="flex items-center gap-3 md:gap-4">
-            {/* Hamburger Menu Button (Mobile Only) */}
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 active:bg-gray-200 transition"
-              aria-label="Open menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            <h1 className="font-unbounded font-semibold text-xl md:text-2xl text-black">
-              Goal Management
-            </h1>
-          </div>
-
-          <div className="flex items-center gap-3 md:gap-7">
-            {/* Notification Icon */}
-            <button className="relative min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-gray-100 rounded-lg transition active:bg-gray-200">
-              <img src={iconNotification} alt="Notifications" className="w-6 md:w-8 h-6 md:h-8" />
-            </button>
-
-            {/* User Profile Dropdown */}
-            <div className="relative" ref={userMenuRef}>
-              <button
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="bg-[#f6f6f6] flex items-center gap-2 md:gap-4 px-2 md:px-3 py-1.5 md:py-2 rounded-full hover:bg-gray-100 active:bg-gray-200 transition min-h-[44px]"
-              >
-                <div className="flex items-center gap-2 md:gap-3.5">
-                  <div className="w-10 md:w-14 h-10 md:h-14 bg-gray-400 rounded-full flex items-center justify-center shrink-0">
-                    <span className="font-montserrat font-normal text-sm md:text-xl text-black">JA</span>
-                  </div>
-                  <div className="text-left hidden md:block">
-                    <p className="font-montserrat font-medium text-base text-black">Jeremiah Alalade</p>
-                    <p className="font-montserrat font-normal text-sm text-black">Admin</p>
-                  </div>
-                </div>
-                <img src={iconDropdown} alt="Menu" className="w-6 md:w-9 h-6 md:h-9 shrink-0" />
-              </button>
-
-              {/* Dropdown Menu */}
-              {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-[320px] md:w-80 bg-white border border-[#c9c9c9] rounded-lg shadow-lg z-50 overflow-hidden">
-                  <div className="px-6 md:px-8 py-4 md:py-5 border-b border-gray-300">
-                    <div className="flex items-center gap-3 md:gap-4">
-                      <div className="w-16 md:w-20 h-16 md:h-20 bg-gray-400 rounded-full flex items-center justify-center shrink-0">
-                        <span className="font-montserrat font-normal text-white text-sm md:text-base">JA</span>
-                      </div>
-                      <div>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black">jalalade@axiomblack.com</p>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black mt-2 md:mt-3">Admin</p>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-[#e8e8e8] hover:bg-gray-300 transition font-montserrat font-medium text-sm md:text-base text-black"
-                  >
-                    <img src={iconLogout} alt="Logout" className="w-5 md:w-7 h-5 md:h-7 shrink-0" />
-                    <span>Logout</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </header>
+        <Header title="Goal Management" onMenuClick={() => setSidebarOpen(true)} />
 
         {/* PAGE CONTENT */}
         <main className="p-4 md:p-10">

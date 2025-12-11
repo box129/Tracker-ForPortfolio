@@ -1,15 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
 
-// Header icons
-const iconNotification = "https://www.figma.com/api/mcp/asset/ded7a757-2476-491a-9144-f622c9a20cd2";
-const iconDropdown = "https://www.figma.com/api/mcp/asset/9d7abf7c-db72-4890-8ebe-89d12f8c8b7b";
-const iconLogout = "https://www.figma.com/api/mcp/asset/e7b2ee4d-0d56-47bd-b57a-c17f490cc555";
-
-type Tab = 'account' | 'company' | 'notification';
+type Tab = 'account' | 'school' | 'notification';
 
 interface AccountFormData {
   firstName: string;
@@ -22,64 +17,53 @@ interface AccountFormData {
   confirmPassword: string;
 }
 
-interface CompanyFormData {
-  companyName: string;
-  companyType: string;
-  companyWebsite: string;
-  numberOfEmployees: string;
-  state: string;
-  country: string;
-  companyDescription: string;
+interface SchoolFormData {
+  schoolName: string;
+  program: string;
+  studentId: string;
+  level: string;
+  bio: string;
 }
 
 interface NotificationSettings {
   notificationFrequency: string;
   emailNotifications: boolean;
-  employeeUpdates: boolean;
-  expiryEmails: boolean;
+  activityUpdates: boolean;
+  goalReminders: boolean;
   criticalAlertsOnly: boolean;
 }
 
 export default function SettingsPage() {
-  const router = useRouter();
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('account');
   const [showFrequencyDropdown, setShowFrequencyDropdown] = useState(false);
-  const userMenuRef = useRef<HTMLDivElement>(null);
   
   const [accountForm, setAccountForm] = useState<AccountFormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    role: '',
-    department: 'seuntracker.com',
+    firstName: 'Jeremiah',
+    lastName: 'Alalade',
+    email: 'jalalade@seuntracker.com',
+    role: 'Student',
+    department: 'Computer Science',
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
 
-  const [companyForm, setCompanyForm] = useState<CompanyFormData>({
-    companyName: 'Seun Tracker',
-    companyType: 'Construction',
-    companyWebsite: 'seuntracker.com',
-    numberOfEmployees: '1-10',
-    state: '',
-    country: '',
-    companyDescription: '',
+  const [schoolForm, setSchoolForm] = useState<SchoolFormData>({
+    schoolName: 'University of Lagos',
+    program: 'Computer Science',
+    studentId: '2021/123456',
+    level: '300',
+    bio: 'Passionate about coding using React.',
   });
 
   const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>({
-    notificationFrequency: '7 days before',
+    notificationFrequency: 'Daily',
     emailNotifications: true,
-    employeeUpdates: true,
-    expiryEmails: true,
+    activityUpdates: true,
+    goalReminders: true,
     criticalAlertsOnly: false,
   });
-
-  const handleLogout = () => {
-    router.push('/login');
-  };
 
   // Prevent body scroll when sidebar is open on mobile
   useEffect(() => {
@@ -93,36 +77,12 @@ export default function SettingsPage() {
     };
   }, [sidebarOpen]);
 
-  // Close user menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setUserMenuOpen(false);
-      }
-    };
-
-    if (userMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [userMenuOpen]);
-
   const handleSaveAccount = () => {
     console.log('Account form saved:', accountForm);
   };
 
-  const handleSaveCompany = () => {
-    console.log('Company form saved:', companyForm);
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      console.log('File uploaded:', file.name);
-    }
+  const handleSaveSchool = () => {
+    console.log('School form saved:', schoolForm);
   };
 
   return (
@@ -133,71 +93,7 @@ export default function SettingsPage() {
       {/* MAIN CONTENT */}
       <div className="flex-1 md:ml-80 w-full">
         {/* HEADER */}
-        <header className="bg-white border-b border-[#e6e6e6] px-4 md:px-10 py-4 md:py-7 flex items-center justify-between shadow-sm sticky top-0 z-30">
-          <div className="flex items-center gap-3 md:gap-4">
-            {/* Hamburger Menu Button (Mobile Only) */}
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 active:bg-gray-200 transition"
-              aria-label="Open menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            <h1 className="font-unbounded font-semibold text-xl md:text-2xl text-black">Settings</h1>
-          </div>
-
-          <div className="flex items-center gap-3 md:gap-7">
-            {/* Notification Icon */}
-            <button className="relative min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-gray-100 rounded-lg transition active:bg-gray-200">
-              <img src={iconNotification} alt="Notifications" className="w-6 md:w-8 h-6 md:h-8" />
-            </button>
-
-            {/* User Profile Dropdown */}
-            <div className="relative" ref={userMenuRef}>
-              <button
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="bg-[#f6f6f6] flex items-center gap-2 md:gap-4 px-2 md:px-3 py-1.5 md:py-2 rounded-full hover:bg-gray-100 active:bg-gray-200 transition min-h-[44px]"
-              >
-                <div className="flex items-center gap-2 md:gap-3.5">
-                  <div className="w-10 md:w-14 h-10 md:h-14 bg-gray-400 rounded-full flex items-center justify-center shrink-0">
-                    <span className="font-montserrat font-normal text-sm md:text-xl text-black">JA</span>
-                  </div>
-                  <div className="text-left hidden md:block">
-                    <p className="font-montserrat font-medium text-base text-black">Jeremiah Alalade</p>
-                    <p className="font-montserrat font-normal text-sm text-black">Admin</p>
-                  </div>
-                </div>
-                <img src={iconDropdown} alt="Menu" className="w-6 md:w-9 h-6 md:h-9 shrink-0" />
-              </button>
-
-              {/* Dropdown Menu */}
-              {userMenuOpen && (
-                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-[320px] md:w-80 bg-white border border-[#c9c9c9] rounded-lg shadow-lg z-50 overflow-hidden">
-                  <div className="px-6 md:px-8 py-4 md:py-5 border-b border-gray-300">
-                    <div className="flex items-center gap-3 md:gap-4">
-                      <div className="w-16 md:w-20 h-16 md:h-20 bg-gray-400 rounded-full flex items-center justify-center shrink-0">
-                        <span className="font-montserrat font-normal text-white text-sm md:text-base">JA</span>
-                      </div>
-                      <div>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black">jalalade@seuntracker.com</p>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black mt-2 md:mt-3">Admin</p>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-[#e8e8e8] hover:bg-gray-300 transition font-montserrat font-medium text-sm md:text-base text-black"
-                  >
-                    <img src={iconLogout} alt="Logout" className="w-5 md:w-7 h-5 md:h-7 shrink-0" />
-                    <span>Logout</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </header>
+        <Header title="Settings" onMenuClick={() => setSidebarOpen(true)} />
 
         {/* PAGE CONTENT */}
         <main className="p-4 md:p-10">
@@ -215,14 +111,14 @@ export default function SettingsPage() {
                 Account Information
               </button>
               <button
-                onClick={() => setActiveTab('company')}
+                onClick={() => setActiveTab('school')}
                 className={`pb-4 md:pb-5 font-montserrat font-normal text-base md:text-lg whitespace-nowrap ${
-                  activeTab === 'company'
+                  activeTab === 'school'
                     ? 'text-black border-b-2 border-black'
                     : 'text-gray-500 hover:text-black'
                 }`}
               >
-                Company Details
+                School Information
               </button>
               <button
                 onClick={() => setActiveTab('notification')}
@@ -294,8 +190,7 @@ export default function SettingsPage() {
                     type="text"
                     value={accountForm.department}
                     onChange={(e) => setAccountForm({ ...accountForm, department: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-[#f6f6f6] text-sm font-montserrat text-gray-500"
-                    disabled
+                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-[#f6f6f6] text-sm font-montserrat"
                   />
                 </div>
               </div>
@@ -352,126 +247,78 @@ export default function SettingsPage() {
             </div>
           )}
 
-          {/* COMPANY DETAILS TAB */}
-          {activeTab === 'company' && (
+          {/* SCHOOL INFORMATION TAB */}
+          {activeTab === 'school' && (
             <div className="max-w-4xl">
-              <h2 className="text-lg md:text-xl font-montserrat font-semibold text-black mb-6">Company Details</h2>
+              <h2 className="text-lg md:text-xl font-montserrat font-semibold text-black mb-6">School Information</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
-                {/* Company Name */}
+                {/* School Name */}
                 <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Company Name</label>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">School Name</label>
                   <input
                     type="text"
-                    value={companyForm.companyName}
-                    onChange={(e) => setCompanyForm({ ...companyForm, companyName: e.target.value })}
+                    value={schoolForm.schoolName}
+                    onChange={(e) => setSchoolForm({ ...schoolForm, schoolName: e.target.value })}
                     className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-[#f6f6f6] text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Company Type */}
+                {/* Program / Major */}
                 <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Company Type</label>
-                  <select
-                    value={companyForm.companyType}
-                    onChange={(e) => setCompanyForm({ ...companyForm, companyType: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-white text-sm font-montserrat"
-                  >
-                    <option>Construction</option>
-                    <option>Technology</option>
-                    <option>Finance</option>
-                  </select>
-                </div>
-
-                {/* Company Website */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Company Website</label>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Program / Major</label>
                   <input
                     type="text"
-                    value={companyForm.companyWebsite}
-                    onChange={(e) => setCompanyForm({ ...companyForm, companyWebsite: e.target.value })}
+                    value={schoolForm.program}
+                    onChange={(e) => setSchoolForm({ ...schoolForm, program: e.target.value })}
                     className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-[#f6f6f6] text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Number of Employees */}
+                {/* Student ID */}
                 <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Number of Employees</label>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Student ID / Matric No.</label>
+                  <input
+                    type="text"
+                    value={schoolForm.studentId}
+                    onChange={(e) => setSchoolForm({ ...schoolForm, studentId: e.target.value })}
+                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-[#f6f6f6] text-sm font-montserrat"
+                  />
+                </div>
+
+                {/* Level */}
+                <div>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Level</label>
                   <select
-                    value={companyForm.numberOfEmployees}
-                    onChange={(e) => setCompanyForm({ ...companyForm, numberOfEmployees: e.target.value })}
+                    value={schoolForm.level}
+                    onChange={(e) => setSchoolForm({ ...schoolForm, level: e.target.value })}
                     className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-white text-sm font-montserrat"
                   >
-                    <option>1-10</option>
-                    <option>11-50</option>
-                    <option>51-200</option>
-                    <option>200+</option>
+                    <option value="100">100 Level</option>
+                    <option value="200">200 Level</option>
+                    <option value="300">300 Level</option>
+                    <option value="400">400 Level</option>
+                    <option value="500">500 Level</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
 
-                {/* State */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">State</label>
-                  <select
-                    value={companyForm.state}
-                    onChange={(e) => setCompanyForm({ ...companyForm, state: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-white text-sm font-montserrat text-gray-500"
-                  >
-                    <option value="">Select State</option>
-                    <option>California</option>
-                    <option>Texas</option>
-                    <option>New York</option>
-                  </select>
-                </div>
-
-                {/* Country */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Country</label>
-                  <select
-                    value={companyForm.country}
-                    onChange={(e) => setCompanyForm({ ...companyForm, country: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-white text-sm font-montserrat text-gray-500"
-                  >
-                    <option value="">Select Country</option>
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Company Logo Upload */}
-              <div className="mb-8">
-                <label className="block text-sm font-montserrat font-medium text-black mb-3">Company Logo</label>
-                <div className="border-2 border-dashed border-[#e6e6e6] rounded-lg p-8 text-center hover:bg-gray-50 transition cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/png,image/jpg"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    id="file-upload"
+                {/* Bio */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">Bio</label>
+                  <textarea
+                    value={schoolForm.bio}
+                    onChange={(e) => setSchoolForm({ ...schoolForm, bio: e.target.value })}
+                    className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-white text-sm font-montserrat"
+                    rows={4}
+                    placeholder="Tell us a bit about yourself..."
                   />
-                  <label htmlFor="file-upload" className="cursor-pointer">
-                    <p className="font-montserrat font-medium text-base text-black mb-1">Upload</p>
-                    <p className="font-montserrat text-sm text-gray-500">It must be png or jpg file</p>
-                  </label>
                 </div>
-              </div>
-
-              {/* Company Description */}
-              <div className="mb-8">
-                <label className="block text-sm font-montserrat font-medium text-black mb-2">Company Description</label>
-                <textarea
-                  value={companyForm.companyDescription}
-                  onChange={(e) => setCompanyForm({ ...companyForm, companyDescription: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-[#e6e6e6] rounded-lg bg-white text-sm font-montserrat"
-                  rows={6}
-                />
               </div>
 
               <div className="flex gap-3">
                 <button
-                  onClick={handleSaveCompany}
+                  onClick={handleSaveSchool}
                   className="px-8 md:px-10 py-2.5 md:py-3 bg-black text-white rounded-lg font-montserrat font-semibold text-base hover:bg-gray-900 transition"
                 >
                   Save Changes
@@ -491,7 +338,7 @@ export default function SettingsPage() {
               {/* Notification Frequency */}
               <div className="mb-8 pb-8 border-b border-[#e6e6e6]">
                 <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Notification Frequency</h3>
-                <p className="text-sm font-montserrat text-gray-500 mb-4">Choose how early you want to receive email reminders before a credential expires.</p>
+                <p className="text-sm font-montserrat text-gray-500 mb-4">Choose how often you want to receive summaries.</p>
 
                 <div className="relative w-full md:w-80">
                   <button
@@ -506,41 +353,32 @@ export default function SettingsPage() {
                     <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#e6e6e6] rounded-lg shadow-lg z-20">
                       <button
                         onClick={() => {
-                          setNotificationSettings({ ...notificationSettings, notificationFrequency: '7 days before' });
+                          setNotificationSettings({ ...notificationSettings, notificationFrequency: 'Daily' });
                           setShowFrequencyDropdown(false);
                         }}
                         className="block w-full text-left px-4 py-2.5 hover:bg-gray-50 font-montserrat text-sm border-b border-[#e6e6e6] last:border-0"
                       >
-                        7 days before
+                        Daily
                       </button>
                       <button
                         onClick={() => {
-                          setNotificationSettings({ ...notificationSettings, notificationFrequency: '15 days before' });
+                          setNotificationSettings({ ...notificationSettings, notificationFrequency: 'Weekly' });
                           setShowFrequencyDropdown(false);
                         }}
                         className="block w-full text-left px-4 py-2.5 hover:bg-gray-50 font-montserrat text-sm border-b border-[#e6e6e6] last:border-0"
                       >
-                        15 days before
-                      </button>
-                      <button
-                        onClick={() => {
-                          setNotificationSettings({ ...notificationSettings, notificationFrequency: '30 days before (default)' });
-                          setShowFrequencyDropdown(false);
-                        }}
-                        className="block w-full text-left px-4 py-2.5 hover:bg-gray-50 font-montserrat text-sm border-b border-[#e6e6e6] last:border-0"
-                      >
-                        30 days before (default)
+                        Weekly
                       </button>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Email Notifications Toggle */}
+              {/* Email Notifications & Toggles */}
               <div className="flex items-start justify-between mb-8 pb-8 border-b border-[#e6e6e6]">
                 <div className="flex-1">
                   <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Email Notifications</h3>
-                  <p className="text-sm font-montserrat text-gray-500">Receive email alerts about credential updates, expiries, and important system events.</p>
+                  <p className="text-sm font-montserrat text-gray-500">Receive email alerts about your account and activities.</p>
                 </div>
                 <button
                   onClick={() => setNotificationSettings({ ...notificationSettings, emailNotifications: !notificationSettings.emailNotifications })}
@@ -556,65 +394,46 @@ export default function SettingsPage() {
                 </button>
               </div>
 
-              {/* Employee Updates Toggle */}
+              {/* Other Toggles */}
               <div className="flex items-start justify-between mb-8 pb-8 border-b border-[#e6e6e6]">
                 <div className="flex-1">
-                  <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Employee updates</h3>
-                  <p className="text-sm font-montserrat text-gray-500">Stay informed about changes made to employee accounts, roles, or activities.</p>
+                  <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Goal Reminders</h3>
+                  <p className="text-sm font-montserrat text-gray-500">Get reminders for your upcoming deadlines and goals.</p>
                 </div>
                 <button
-                  onClick={() => setNotificationSettings({ ...notificationSettings, employeeUpdates: !notificationSettings.employeeUpdates })}
+                  onClick={() => setNotificationSettings({ ...notificationSettings, goalReminders: !notificationSettings.goalReminders })}
                   className={`ml-4 relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    notificationSettings.employeeUpdates ? 'bg-black' : 'bg-gray-300'
+                    notificationSettings.goalReminders ? 'bg-black' : 'bg-gray-300'
                   }`}
                 >
                   <span
                     className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      notificationSettings.employeeUpdates ? 'translate-x-5' : 'translate-x-1'
+                      notificationSettings.goalReminders ? 'translate-x-5' : 'translate-x-1'
                     }`}
                   />
                 </button>
               </div>
 
-              {/* Expiry Summary Emails Toggle */}
-              <div className="flex items-start justify-between mb-8 pb-8 border-b border-[#e6e6e6]">
+               {/* Activity Updates */}
+               <div className="flex items-start justify-between mb-8 pb-8 border-b border-[#e6e6e6]">
                 <div className="flex-1">
-                  <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Receive Expiry Summary Emails</h3>
-                  <p className="text-sm font-montserrat text-gray-500">Get a summary email showing all credentials that are expiring soon for easier monitoring.</p>
+                  <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Activity Updates</h3>
+                  <p className="text-sm font-montserrat text-gray-500">Stay informed about your progress and achievements.</p>
                 </div>
                 <button
-                  onClick={() => setNotificationSettings({ ...notificationSettings, expiryEmails: !notificationSettings.expiryEmails })}
+                  onClick={() => setNotificationSettings({ ...notificationSettings, activityUpdates: !notificationSettings.activityUpdates })}
                   className={`ml-4 relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    notificationSettings.expiryEmails ? 'bg-black' : 'bg-gray-300'
+                    notificationSettings.activityUpdates ? 'bg-black' : 'bg-gray-300'
                   }`}
                 >
                   <span
                     className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      notificationSettings.expiryEmails ? 'translate-x-5' : 'translate-x-1'
+                      notificationSettings.activityUpdates ? 'translate-x-5' : 'translate-x-1'
                     }`}
                   />
                 </button>
               </div>
 
-              {/* Critical Alerts Only Toggle */}
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <h3 className="text-base md:text-lg font-montserrat font-medium text-black mb-1">Critical Alerts Only</h3>
-                  <p className="text-sm font-montserrat text-gray-500">Limit notifications to urgent events such as expired credentials or failed uploads.</p>
-                </div>
-                <button
-                  onClick={() => setNotificationSettings({ ...notificationSettings, criticalAlertsOnly: !notificationSettings.criticalAlertsOnly })}
-                  className={`ml-4 relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    notificationSettings.criticalAlertsOnly ? 'bg-black' : 'bg-gray-300'
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      notificationSettings.criticalAlertsOnly ? 'translate-x-5' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-              </div>
             </div>
           )}
         </main>

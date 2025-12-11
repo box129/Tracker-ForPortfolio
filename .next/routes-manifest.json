@@ -49,28 +49,28 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
-      "page": "/credentials",
-      "regex": "^/credentials(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/credentials(?:/)?$"
-    },
-    {
       "page": "/dashboard",
       "regex": "^/dashboard(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/dashboard(?:/)?$"
     },
     {
-      "page": "/entity",
-      "regex": "^/entity(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/entity(?:/)?$"
-    },
-    {
       "page": "/forgot-password",
       "regex": "^/forgot\\-password(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/forgot\\-password(?:/)?$"
+    },
+    {
+      "page": "/goals",
+      "regex": "^/goals(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/goals(?:/)?$"
+    },
+    {
+      "page": "/habits",
+      "regex": "^/habits(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/habits(?:/)?$"
     },
     {
       "page": "/login",
