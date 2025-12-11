@@ -39,7 +39,7 @@ export default function Home() {
       <nav className="w-full flex items-center justify-between px-4 sm:px-6 md:px-8 py-4 md:py-6 bg-white border-b border-gray-200 sticky top-0 z-50" data-node-id="1708:7296">
         <div className="flex gap-8 md:gap-20 items-center">
           <div className="relative w-16 h-16 md:w-24 md:h-24" data-name="Logo" data-node-id="1707:7279">
-            <img alt="Axiom Tracker Logo" className="w-full h-full" src={imgSubtract} />
+            <img alt="Seun Tracker Logo" className="w-full h-full" src={imgSubtract} />
           </div>
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-6 items-center">

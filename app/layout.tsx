@@ -3,9 +3,9 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata: Metadata = {
-  title: "Axiom Tracker",
+  title: "SEUN TRACKER",
   description:
-    "Axiom Tracker – smart certificate tracking, compliance automation, and real-time dashboards.",
+    "SEUN TRACKER – Master your habits, crush your goals. Your personal command center for growth and productivity.",
 };
 
 export default function RootLayout({
