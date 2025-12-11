@@ -1,6 +1,6 @@
-# 🎯 Axiom Tracker
+# 🎯 Seun Tracker
 
-A modern certificate and compliance management platform built with Next.js, React, TypeScript, and Supabase. Axiom Tracker helps organizations automate certificate tracking, manage safety orientations, and maintain 100% compliance with intelligent expiration alerts and real-time dashboards.
+A personal command center for growth and productivity built with Next.js, React, TypeScript, and Supabase. Seun Tracker helps you master your habits, crush your goals, and gain insights to become your best self.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.0-black?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0-blue?style=flat-square&logo=react)
@@ -11,11 +11,10 @@ A modern certificate and compliance management platform built with Next.js, Reac
 ## ✨ Features
 
 - 🔐 **Secure Authentication** - NextAuth.js with credential-based login
-- 📜 **Certificate Management** - Track all employee credentials in one place
-- 🔔 **Smart Alerts** - Automatic notifications before certificates expire
-- 📊 **Compliance Dashboard** - Real-time analytics and reporting
-- 🏢 **Multi-tenant Support** - Organization-based access control
-- 🔍 **QR Verification** - Quick certificate validation
+- 🎯 **Goal Tracking** - Set ambitious goals and break them down into milestones
+- ✅ **Habit Management** - specific habit tracking with streaks and frequency
+- 📊 **Personal Analytics** - Real-time dashboards to visualize your progress
+- � **Smart Reminders** - Automatic notifications to keep you consistent
 - 📱 **Responsive Design** - Beautiful UI that works on all devices
 - 🔒 **Row Level Security** - Database-level data protection
 
@@ -32,7 +31,7 @@ A modern certificate and compliance management platform built with Next.js, Reac
 1. **Clone the repository** (or download the project)
 
 ```bash
-cd axiom-tracker
+cd seun-student-tracker
 ```
 
 2. **Install dependencies**
@@ -80,7 +79,7 @@ Open [http://localhost:3000](http://localhost:3000) to see your application! �
 ## 🏗️ Project Structure
 
 ```
-axiom-tracker/
+seun-student-tracker/
 ├── app/                          # Next.js app directory
 │   ├── api/auth/[...nextauth]/  # Authentication API
 │   ├── login/                   # Login page
@@ -103,11 +102,10 @@ axiom-tracker/
 The application uses the following core tables:
 
 - **users** - User accounts and authentication
-- **organizations** - Company/organization data
-- **certificates** - Certificate and credential records
-- **alert_rules** - Notification configuration
-- **notifications** - Notification history
-- **audit_logs** - Compliance audit trail
+- **goals** - Personal objectives and targets
+- **habits** - Daily/weekly habits to track
+- **activities** - Log of daily progress
+- **notifications** - System alerts and reminders
 
 See [`supabase/README.md`](./supabase/README.md) for detailed schema documentation.
 
@@ -127,7 +125,7 @@ See [`supabase/README.md`](./supabase/README.md) for detailed schema documentati
 - ✅ JWT-based session management
 - ✅ Environment variable protection
 - ✅ Audit logging for compliance
-- ✅ Organization-based data isolation
+- ✅ User data isolation
 
 ## 📝 Available Scripts
 
@@ -142,19 +140,18 @@ npm run lint     # Run ESLint
 
 If you added sample data, you can test with:
 
-- **Email**: `admin@axiomtracker.com`
+- **Email**: `admin@seuntracker.com`
 - **Password**: `password123`
 
 ## 🚧 Roadmap
 
 - [ ] Implement signup functionality
 - [ ] Build authenticated dashboard
-- [ ] Add certificate upload feature
-- [ ] Create alert configuration UI
-- [ ] Build compliance reports
+- [ ] Add goal creation wizard
+- [ ] Create habit streak visualization
+- [ ] Build progress reports
 - [ ] Add email notifications
 - [ ] Implement forgot password flow
-- [ ] Add multi-language support
 - [ ] Mobile app (React Native)
 
 ## 🤝 Contributing
