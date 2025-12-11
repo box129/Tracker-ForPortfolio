@@ -4,12 +4,11 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-// Image assets from Figma - Signup Screen
-const imgPrivateInvestigator =
-  "https://www.figma.com/api/mcp/asset/80d16b98-127b-45d8-b804-974d2684d6c5";
-const imgLogo = "https://www.figma.com/api/mcp/asset/69952e56-ddb8-47fc-a960-c8ef29d99c60";
-const imgBackArrow = "https://www.figma.com/api/mcp/asset/ba37debe-3df0-45db-9d69-8ae2b151d0df";
-const imgArrowButton = "https://www.figma.com/api/mcp/asset/26af4744-424b-4f1f-a72d-cf9a6465e45c";
+// Image assets (Unsplash & SVGs)
+const imgPrivateInvestigator = "https://images.unsplash.com/photo-1513258496098-b05360f9738e?q=80&w=2070&auto=format&fit=crop"; // Creative/Planning
+const imgLogo = "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='white'/%3E%3Cpath d='M50 20L75 35V65L50 80L25 65V35L50 20Z' fill='black'/%3E%3C/svg%3E"; // Hex Logo
+const imgBackArrow = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 19l-7-7 7-7' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const imgArrowButton = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 5v14M19 12l-7 7-7-7' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -65,7 +64,7 @@ export default function SignupPage() {
       {/* Left side - Image with overlay and hero content */}
       <section className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen overflow-hidden flex flex-col">
         <img
-          alt="Professional working on laptop"
+          alt="Planning session"
           src={imgPrivateInvestigator}
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -78,7 +77,7 @@ export default function SignupPage() {
           {/* Header */}
           <header className="flex items-center justify-between w-full text-white mb-auto">
             <div className="flex items-center gap-2 lg:gap-4">
-              <div className="relative w-10 h-10 lg:w-12 lg:h-12 flex-shrink-0">
+              <div className="relative w-10 h-10 lg:w-12 lg:h-12 shrink-0">
                 <img 
                   alt="Axiom Tracker Logo" 
                   className="w-full h-full object-contain" 
@@ -86,7 +85,7 @@ export default function SignupPage() {
                 />
               </div>
               <p className="font-unbounded font-semibold text-lg lg:text-2xl">
-                Axiom Tracker
+                Seun Tracker
               </p>
             </div>
 
@@ -94,7 +93,7 @@ export default function SignupPage() {
               href="/"
               className="flex items-center gap-2 text-xs sm:text-sm lg:text-base font-montserrat font-medium text-white hover:text-gray-200 transition-colors whitespace-nowrap"
             >
-              <div className="relative w-4 h-3 lg:w-5 lg:h-4 flex-shrink-0">
+              <div className="relative w-4 h-3 lg:w-5 lg:h-4 shrink-0">
                 <img alt="Back Arrow" className="w-full h-full object-contain" src={imgBackArrow} />
               </div>
               <span>Back to Website</span>
@@ -105,7 +104,7 @@ export default function SignupPage() {
           <div className="relative max-w-sm">
             <div className="flex flex-col gap-4">
               <p className="font-unbounded font-bold text-2xl lg:text-4xl text-white leading-tight">
-                Never Miss Your Credential Renewal Again.
+                Start Your Journey.
               </p>
               
               {/* Arrow button */}
@@ -114,7 +113,7 @@ export default function SignupPage() {
                 className="bg-white rounded-lg lg:rounded-xl w-fit p-2 lg:p-3 flex items-center justify-center hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95"
                 aria-label="Learn more"
               >
-                <div className="relative w-5 h-5 lg:w-7 lg:h-7 scale-y-[-100%]">
+                <div className="relative w-5 h-5 lg:w-7 lg:h-7 -scale-y-100">
                   <img alt="Arrow Down" className="w-full h-full object-contain" src={imgArrowButton} />
                 </div>
               </button>
@@ -133,7 +132,7 @@ export default function SignupPage() {
               Create Account
             </h1>
             <p className="font-montserrat text-base lg:text-lg text-gray-700">
-              Sign up to manage and access your credentials securely.
+              Sign up to build better habits and track your progress.
             </p>
           </div>
 

@@ -5,12 +5,11 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 
-// Image assets from Figma - Login Screen
-const imgPrivateInvestigator =
-  "https://www.figma.com/api/mcp/asset/80bf7146-d0d8-45ec-a251-2e4c7dd8da3d";
-const imgLogo = "https://www.figma.com/api/mcp/asset/f173bd4d-4db9-4a5e-9e69-f0464712c9ab";
-const imgBackArrow = "https://www.figma.com/api/mcp/asset/7487f08c-1ef5-42bb-9ec8-60cdea4d3e5f";
-const imgArrowButton = "https://www.figma.com/api/mcp/asset/c2a5f877-e566-483d-b6fb-9795a30685db";
+// Image assets (Unsplash & SVGs)
+const imgPrivateInvestigator = "https://images.unsplash.com/photo-1543269664-7eef42226a21?auto=format&fit=crop&q=80&w=2070"; // Focus/Studying
+const imgLogo = "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='white'/%3E%3Cpath d='M50 20L75 35V65L50 80L25 65V35L50 20Z' fill='black'/%3E%3C/svg%3E"; // Hex Logo
+const imgBackArrow = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 19l-7-7 7-7' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const imgArrowButton = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 5v14M19 12l-7 7-7-7' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 
 export default function SigninPage() {
   const router = useRouter();
@@ -49,7 +48,7 @@ export default function SigninPage() {
       {/* Left side - Image with overlay and hero content */}
       <section className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen overflow-hidden flex flex-col shrink-0">
         <img
-          alt="Professional working on laptop"
+          alt="Focusing on goals"
           src={imgPrivateInvestigator}
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -70,7 +69,7 @@ export default function SigninPage() {
                 />
               </div>
               <p className="font-unbounded font-semibold text-lg lg:text-2xl">
-                Axiom Tracker
+                Seun Tracker
               </p>
             </div>
 
@@ -89,7 +88,7 @@ export default function SigninPage() {
           <div className="relative max-w-sm">
             <div className="flex flex-col gap-4">
               <p className="font-unbounded font-bold text-2xl lg:text-4xl text-white leading-tight">
-                Never Miss Your Credential Renewal Again.
+                Stay Consistent With Your Goals.
               </p>
               
               {/* Arrow button */}
@@ -117,7 +116,7 @@ export default function SigninPage() {
               Welcome Back
             </h1>
             <p className="font-montserrat text-base lg:text-lg text-gray-700">
-              Sign in to manage your Certificate & License Dashboard.
+              Sign in to manage your Goal & Habit Dashboard.
             </p>
           </div>
 

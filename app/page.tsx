@@ -1,20 +1,23 @@
 "use client";
 
-const imgFreepikGenrateAnImageThatExplainsmartCertificateTra359761 = "https://www.figma.com/api/mcp/asset/97b7c926-90cc-4c02-85cb-e17594f35184";
-const imgPortraitYoungGirlGrayTShirtPurpleWall1 = "https://www.figma.com/api/mcp/asset/f1f0ae0f-6d18-4bbe-bde9-74401d0de964";
-const imgHappyManStudentWithAfroHairdoShowsWhiteTeethBeingGoodMoodAfterClasses1 = "https://www.figma.com/api/mcp/asset/54b6ec21-9592-471f-a330-67e1be98b5bd";
-const imgCloseUpPortraitAttractiveYoungWomanIsolated11 = "https://www.figma.com/api/mcp/asset/d7aa9e88-d17b-429a-abd6-53fd0c91b6b6";
-const img897551 = "https://www.figma.com/api/mcp/asset/d76e2fb7-2bd2-4f7a-9c0e-3717bced2687";
-const img51 = "https://www.figma.com/api/mcp/asset/ec98f2d7-3964-47a2-853d-af248056da24";
-const imgWomanSittingHomeOfficeDeskLookingBusinessDocuments1 = "https://www.figma.com/api/mcp/asset/3614f7b6-2f57-40aa-bf62-f3bab3320af3";
-const imgSubtract = "https://www.figma.com/api/mcp/asset/69dba925-7915-4086-bf2a-334885229f1e";
-const img = "https://www.figma.com/api/mcp/asset/c8ba3351-af04-4a9f-88ab-4f4bcee3c569";
-const imgSubtract1 = "https://www.figma.com/api/mcp/asset/b6fcc130-f460-4ee2-b205-99731f89b657";
-const imgSubtract2 = "https://www.figma.com/api/mcp/asset/4d7a0538-24fb-4d8b-a6c5-4bc6a1a8ed76";
-const imgLine2 = "https://www.figma.com/api/mcp/asset/abdb0cf7-73e1-4a2f-8026-c9eafea59360";
-const img1 = "https://www.figma.com/api/mcp/asset/b40095c6-b896-46e1-94a1-296d1efbd834";
-const img2 = "https://www.figma.com/api/mcp/asset/6da759cf-3211-4803-b0c8-64dcd0004f95";
-const imgSubtract3 = "https://www.figma.com/api/mcp/asset/077a8b15-1da9-497e-aea7-0c69c7cd63e1";
+// Photos from Unsplash
+const imgFreepikGenrateAnImageThatExplainsmartCertificateTra359761 = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"; // Hero BG
+const imgPortraitYoungGirlGrayTShirtPurpleWall1 = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"; // Avatar 1
+const imgHappyManStudentWithAfroHairdoShowsWhiteTeethBeingGoodMoodAfterClasses1 = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"; // Avatar 2
+const imgCloseUpPortraitAttractiveYoungWomanIsolated11 = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"; // Avatar 3
+const img897551 = "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800"; // Smart Credentials (Security)
+const img51 = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800"; // Notifications (Tech)
+const imgWomanSittingHomeOfficeDeskLookingBusinessDocuments1 = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800"; // Analytics
+
+// Icons & Logos (SVG Data URIs)
+const imgSubtract = "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='black'/%3E%3Cpath d='M50 20L75 35V65L50 80L25 65V35L50 20Z' fill='white'/%3E%3C/svg%3E"; // Main Logo (Black Hexagon)
+const imgSubtract3 = "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='white'/%3E%3Cpath d='M50 20L75 35V65L50 80L25 65V35L50 20Z' fill='black'/%3E%3C/svg%3E"; // Footer Logo (White Hexagon)
+const imgSubtract1 = "data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' stroke='white' stroke-width='2'/%3E%3Cpath d='M12 8v8M8 12h8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"; // Features Icon
+const imgSubtract2 = "data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' stroke='black' stroke-width='2'/%3E%3Cpath d='M12 7v5l3 3' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"; // How it works icon
+const imgLine2 = "data:image/svg+xml,%3Csvg width='1000' height='2' viewBox='0 0 1000 2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline y1='1' x2='1000' y2='1' stroke='%23E5E7EB' stroke-width='2' stroke-dasharray='8 8'/%3E%3C/svg%3E"; // Dotted Line
+const img = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"; // Right Arrow
+const img1 = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 9l-7 7-7-7' stroke='gray' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"; // Chevron Down
+const img2 = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 17L17 7M17 7H7M17 7V17' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"; // Up-Right Arrow
 
 import { useState } from 'react';
 
@@ -110,16 +113,16 @@ export default function Home() {
           <div className="flex-1 flex flex-col gap-8 sm:gap-10 md:gap-12 items-center justify-center w-full max-w-5xl mx-auto pt-8 sm:pt-10 md:pt-12" data-node-id="1712:491">
             {/* Welcome Badge */}
             <div className="bg-white rounded-lg px-6 sm:px-8 py-3 sm:py-4 inline-flex" data-node-id="1712:493">
-              <p className="font-montserrat font-medium text-base sm:text-lg text-black">Welcome to Axiom Tracker</p>
+              <p className="font-montserrat font-medium text-base sm:text-lg text-black">Welcome to Seun Tracker</p>
             </div>
 
             {/* Main Content */}
             <div className="flex flex-col gap-4 sm:gap-6 items-center w-full text-center text-white" data-node-id="1712:497">
               <h1 className="font-unbounded font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight max-w-4xl px-4">
-                Never Miss a Certificate<br />Expiry Again.
+                Master Your Habits.<br />Crush Your Goals.
               </h1>
               <p className="font-geist font-medium text-lg sm:text-xl md:text-2xl leading-relaxed max-w-3xl px-4">
-                Smart certificate tracking that keeps your team compliant, certified, and audit-ready. Automated alerts, and real-time compliance dashboards in one powerful platform.
+                Your personal command center for growth. Track habits, set ambitious goals, and get the insights you need to become your best self—every single day.
               </p>
             </div>
 
@@ -132,7 +135,7 @@ export default function Home() {
                 <button onClick={() => scrollToSection('how-it-works')} className="bg-white rounded-3xl px-6 sm:px-8 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px] flex-1 sm:flex-initial" data-node-id="1712:504">
                   <p className="font-montserrat font-semibold text-base sm:text-lg text-black">Learn How it Works</p>
                 </button>
-                <button className="bg-white rounded-3xl px-3 sm:px-4 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px]" data-node-id="1712:506">
+                <button onClick={() => scrollToSection('how-it-works')} className="bg-white rounded-3xl px-3 sm:px-4 py-3 sm:py-4 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95 min-h-[44px]" data-node-id="1712:506">
                   <img alt="Arrow" className="w-6 h-6 sm:w-8 sm:h-8" src={img} />
                 </button>
               </div>
@@ -153,7 +156,7 @@ export default function Home() {
               </div>
             </div>
             <p className="font-geist font-semibold text-sm sm:text-base text-white max-w-xs text-center sm:text-left px-4 sm:px-0">
-              Track certifications, ensure compliance, and automate renewals effortlessly with Axiom tracker
+              Join thousands of achievers tracking their journey with Seun Tracker
             </p>
           </div>
         </div>
@@ -164,7 +167,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6" data-node-id="1717:881">
           <p className="font-unbounded font-semibold text-xl sm:text-2xl text-gray-700">About</p>
           <p className="font-geist font-medium text-lg sm:text-xl md:text-2xl text-black leading-relaxed">
-            {`Axiom Tracker is a modern compliance management platform that automates certificate tracking, safety orientations, and incident reporting for organizations. With intelligent expiration alerts, QR verification, and real-time dashboards, we help 500+ companies maintain 100% compliance while saving 60% of administrative time.`}
+            {`Seun Tracker is a modern personal productivity platform designed to help students and professionals stay organized. Whether you're tracking study milestones, building new habits, or managing personal deadlines, our intelligent dashboard keeps you focused on what matters most. Stop drifting and start achieving.`}
           </p>
         </div>
       </section>
@@ -179,11 +182,11 @@ export default function Home() {
                 <img alt="" className="w-full h-full" src={imgSubtract2} />
               </div>
               <p className="font-unbounded font-semibold text-2xl sm:text-3xl md:text-4xl text-gray-700 text-center px-4">
-                How Does Axiom Tracker Work?
+                How Does Seun Tracker Work?
               </p>
             </div>
             <p className="font-geist font-medium text-lg sm:text-xl md:text-2xl text-black text-center max-w-3xl mx-auto px-4">
-              Get started in minutes, not months. Our simple three-step process gets you compliant fast.
+              Building a better you shouldn't be complicated. Our simple three-step process helps you gain momentum fast.
             </p>
           </div>
 
@@ -212,9 +215,9 @@ export default function Home() {
             {/* Content Cards */}
             <div className="grid grid-cols-3 gap-4 lg:gap-6">
               {[
-                { title: "Upload Certificates", body: "Bulk upload existing certificates or integrate with your HR system. Our AI-powered OCR extracts all relevant data automatically." },
-                { title: "Set Alert Rules", body: "Configure notification schedules, escalation chains, and renewal workflows. Customize alerts for different certificate types." },
-                { title: "Stay Compliant", body: "Relax knowing your team is always certified. Access real-time dashboards, generate audit reports, and maintain 100% compliance." }
+                { title: "Set Your Goals", body: "Define what success looks like for you. Whether it's learning a new skill, reading more books, or hitting fitness milestones." },
+                { title: "Track Habits", body: "Build consistency with daily habit tracking. Set streaks, get reminders, and visualize your progress over time." },
+                { title: "Review Progress", body: "See how far you've come. Access detailed analytics, celebrate wins, and adjust your plan based on real data." }
               ].map((card, idx) => (
                 <div key={idx} className="bg-white rounded-2xl border-2 border-black p-6 lg:p-8 flex flex-col gap-4 lg:gap-6 items-center text-center transition-all duration-200 hover:shadow-xl hover:border-gray-400 cursor-pointer">
                   <p className="font-unbounded font-semibold text-xl lg:text-2xl text-black">{card.title}</p>
@@ -227,9 +230,9 @@ export default function Home() {
           {/* Mobile View - Stacked */}
           <div className="md:hidden space-y-6 sm:space-y-8">
             {[
-              { step: "01", title: "Upload Certificates", body: "Bulk upload existing certificates or integrate with your HR system. Our AI-powered OCR extracts all relevant data automatically." },
-              { step: "02", title: "Set Alert Rules", body: "Configure notification schedules, escalation chains, and renewal workflows. Customize alerts for different certificate types." },
-              { step: "03", title: "Stay Compliant", body: "Relax knowing your team is always certified. Access real-time dashboards, generate audit reports, and maintain 100% compliance." }
+              { step: "01", title: "Set Your Goals", body: "Define what success looks like for you. Whether it's learning a new skill, reading more books, or hitting fitness milestones." },
+              { step: "02", title: "Track Habits", body: "Build consistency with daily habit tracking. Set streaks, get reminders, and visualize your progress over time." },
+              { step: "03", title: "Review Progress", body: "See how far you've come. Access detailed analytics, celebrate wins, and adjust your plan based on real data." }
             ].map((card, idx) => (
               <div key={idx} className="border-2 border-black rounded-2xl p-5 sm:p-6 flex flex-col gap-5 sm:gap-6 items-center transition-all duration-200 hover:shadow-lg hover:border-gray-400 cursor-pointer">
                 <div className="bg-black rounded-full w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center shadow-lg">
@@ -251,7 +254,7 @@ export default function Home() {
           {/* Header */}
           <div className="space-y-5 sm:space-y-7 mb-12 sm:mb-14 md:mb-16 text-center" data-node-id="1714:647">
             <div className="inline-block mx-auto space-y-6 sm:space-y-8" data-node-id="1714:639">
-              <p className="font-unbounded font-semibold text-3xl sm:text-4xl text-white px-4">Axiom tracker Features</p>
+              <p className="font-unbounded font-semibold text-3xl sm:text-4xl text-white px-4">Seun Tracker Features</p>
               <div className="flex justify-center">
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20" data-node-id="1714:643">
                   <img alt="" className="w-full h-full" src={imgSubtract1} />
@@ -259,42 +262,42 @@ export default function Home() {
               </div>
             </div>
             <p className="font-geist font-medium text-lg sm:text-xl md:text-2xl text-white px-4">
-              Everything you need to manage certificates, ensure compliance, and protect your business from regulatory risks.
+              Everything you need to organize your life, build discipline, and reach your full potential.
             </p>
           </div>
 
           {/* Feature Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12" data-node-id="1792:9853">
-            {/* Smart Credentials */}
+            {/* Smart Credentials -> Goal Tracking */}
             <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-200 hover:shadow-xl hover:scale-105 cursor-pointer" data-node-id="1715:649">
               <div className="h-60 sm:h-64 md:h-72 overflow-hidden" data-node-id="1792:9854">
-                <img alt="Smart Credentials" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" src={img897551} />
+                <img alt="Personal Goal Tracking" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" src={img897551} />
               </div>
               <div className="p-5 sm:p-6 space-y-2 sm:space-y-2.5 flex-1 flex flex-col">
-                <p className="font-montserrat font-semibold text-xl sm:text-2xl text-black">Smart Credentials Tracking</p>
-                <p className="font-montserrat font-normal text-base sm:text-lg text-black">Track all employee credentials in one place and get automatic alerts before they expire.</p>
+                <p className="font-montserrat font-semibold text-xl sm:text-2xl text-black">Smart Goal Tracking</p>
+                <p className="font-montserrat font-normal text-base sm:text-lg text-black">Break down big dreams into minimal actionable steps. Track deadlines and milestones effortlessly.</p>
               </div>
             </div>
 
-            {/* Intelligent Notifications */}
+            {/* Intelligent Notifications -> Habit Building */}
             <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-200 hover:shadow-xl hover:scale-105 cursor-pointer" data-node-id="1792:9859">
               <div className="h-60 sm:h-64 md:h-72 overflow-hidden" data-node-id="1792:9860">
-                <img alt="Intelligent Notifications" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" src={img51} />
+                <img alt="Habit Reminders" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" src={img51} />
               </div>
               <div className="p-5 sm:p-6 space-y-2 sm:space-y-2.5 flex-1 flex flex-col">
-                <p className="font-montserrat font-semibold text-xl sm:text-2xl text-black">Intelligent Notifications</p>
-                <p className="font-montserrat font-normal text-base sm:text-lg text-black">Get smart, multi-channel alerts with customizable reminders and automatic escalation to the right people.</p>
+                <p className="font-montserrat font-semibold text-xl sm:text-2xl text-black">Daily Habit Reminders</p>
+                <p className="font-montserrat font-normal text-base sm:text-lg text-black">Stay consistent with gentle nudges. Customize your notification schedule to fit your routine.</p>
               </div>
             </div>
 
-            {/* Real-Time Analytics */}
+            {/* Real-Time Analytics -> Personal Insights */}
             <div className="bg-white rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-200 hover:shadow-xl hover:scale-105 cursor-pointer" data-node-id="1792:9871">
               <div className="h-60 sm:h-64 md:h-72 overflow-hidden" data-node-id="1792:9872">
-                <img alt="Real-Time Analytics" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" src={imgWomanSittingHomeOfficeDeskLookingBusinessDocuments1} />
+                <img alt="Progress Insights" className="w-full h-full object-cover transition-transform duration-300 hover:scale-110" src={imgWomanSittingHomeOfficeDeskLookingBusinessDocuments1} />
               </div>
               <div className="p-5 sm:p-6 space-y-2 sm:space-y-2.5 flex-1 flex flex-col">
-                <p className="font-montserrat font-semibold text-xl sm:text-2xl text-black">Real-Time Analytics</p>
-                <p className="font-montserrat font-normal text-base sm:text-lg text-black">Monitor compliance with live dashboards and predictive insights to identify risks early and track trends across teams.</p>
+                <p className="font-montserrat font-semibold text-xl sm:text-2xl text-black">Personal Insights</p>
+                <p className="font-montserrat font-normal text-base sm:text-lg text-black">Visualize your growth with beautiful charts. Identify patterns and understand your productivity peaks.</p>
               </div>
             </div>
           </div>
@@ -321,20 +324,20 @@ export default function Home() {
           <div className="space-y-5">
             {[
               {
-                question: "How does Axiom Tracker prevent certificate expiries?",
-                answer: "Axiom Tracker uses intelligent automation to monitor all your certificates and sends customizable alerts at multiple intervals before expiration. You can set up notification schedules (e.g., 90, 60, 30, and 7 days before expiry), configure escalation chains to notify supervisors if renewals aren't completed, and receive alerts via email, SMS, or in-app notifications. Our dashboard also provides a real-time view of all upcoming expirations, so nothing slips through the cracks."
+                question: "How does Seun Tracker help me reach my goals?",
+                answer: "Seun Tracker turns abstract goals into action. By letting you define clear milestones and track daily habits that lead to those goals, we help you bridge the gap between planning and doing. Our reminder system ensures you never forget a task, while visual progress bars keep you motivated to maintain your streak."
               },
               {
-                question: "Can Axiom Tracker integrate with our existing HR systems?",
-                answer: "Yes! Axiom Tracker offers seamless integration with popular HR and workforce management systems including BambooHR, Workday, ADP, and SAP SuccessFactors. We also provide a robust REST API for custom integrations, support bulk CSV imports for easy data migration, and offer SSO (Single Sign-On) integration with Azure AD, Okta, and Google Workspace. Our team can help you set up integrations during onboarding."
+                question: "Is Seun Tracker suitable for students?",
+                answer: "Absolutely! Students use Seun Tracker to manage assignment deadlines, track study hours, and build routine habits like 'Review Notes' or 'Practice Coding'. It's perfect for balancing academic responsibilities with personal growth projects."
               },
               {
-                question: "Is our certificate data secure?",
-                answer: "Absolutely. Security is our top priority. All data is encrypted in transit (TLS 1.3) and at rest (AES-256 encryption). We're SOC 2 Type II certified and fully GDPR compliant. Our infrastructure is hosted on enterprise-grade cloud servers with 99.9% uptime SLA, regular security audits and penetration testing, role-based access controls (RBAC) to limit data access, and comprehensive audit logs of all system activities. We also offer custom data retention policies to meet your compliance requirements."
+                question: "Can I sync my data across devices?",
+                answer: "Yes. Your Seun Tracker account is cloud-based, meaning you can access your dashboard from your laptop, tablet, or phone. Start your day by reviewing goals on your phone, and dive deep into analytics on your desktop later. Your progress is always up to date."
               },
               {
-                question: "What types of certificates can Axiom Tracker manage?",
-                answer: "Axiom Tracker can manage virtually any type of certificate or credential, including: Safety certifications (OSHA, First Aid, CPR), Professional licenses (medical, legal, engineering), Training certificates (forklift, confined space, hazmat), Industry-specific credentials (food safety, security clearances), Educational certifications (degrees, continuing education), Equipment certifications (crane operator, heavy machinery), and Insurance certificates (liability, workers comp). Our AI-powered OCR can automatically extract expiration dates and relevant details from most certificate formats."
+                question: "Is my personal data private?",
+                answer: "Your privacy is paramount. Seun Tracker uses industry-standard encryption to protect your data. We do not sell your personal information or habit data to third parties. Your goals and dreams are personal, and we keep them that way."
               }
             ].map((faq, idx) => (
               <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-200" data-node-id={`1715:${671 + idx * 6}`}>
@@ -373,10 +376,10 @@ export default function Home() {
       <section className="w-full bg-black py-20 px-8" data-node-id="1715:704">
         <div className="max-w-3xl mx-auto flex flex-col gap-10 items-center text-center py-12" data-node-id="1715:716">
           <p className="font-unbounded font-bold text-3xl sm:text-4xl text-white leading-tight">
-            Ready to Eliminate Compliance Risks?
+            Ready to Transform Your Productivity?
           </p>
           <p className="font-geist font-semibold text-xl sm:text-2xl text-white max-w-2xl">
-            Join 500+ companies that trust Axiom Tracker to manage their certificates and stay compliant.
+            Join a community of doers who trust Seun Tracker to organize their lives and achieve their dreams.
           </p>
           <div className="flex flex-col sm:flex-row gap-2 items-center" data-node-id="1715:705">
             <a href="/login" className="bg-white rounded-3xl px-10 py-5 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95" data-node-id="1715:706">
@@ -384,9 +387,9 @@ export default function Home() {
             </a>
             <div className="flex items-center justify-center">
               <div className="scale-y-[-1]">
-                <button className="bg-white rounded-3xl px-6 py-5 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95">
+                <a href="/login" className="bg-white rounded-3xl px-6 py-5 inline-flex cursor-pointer hover:bg-gray-100 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95">
                   <img alt="Arrow" className="size-8" src={img2} />
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -402,11 +405,11 @@ export default function Home() {
               <img alt="Logo" className="w-full h-full" src={imgSubtract3} />
             </div>
             <div>
-              <p className="font-montserrat font-semibold text-lg text-white leading-8 mb-0">Let's make your estate safer and smarter.</p>
-              <p className="font-montserrat font-semibold text-lg text-white leading-8">Contact us for bulk estate discounts or multi-location deployment.</p>
+              <p className="font-montserrat font-semibold text-lg text-white leading-8 mb-0">Let's make your goals a reality.</p>
+              <p className="font-montserrat font-semibold text-lg text-white leading-8">Start your journey to a more organized life today.</p>
             </div>
             <p className="font-montserrat font-normal text-base text-white/80 leading-7">
-              © 2025 Axiom Tracker - All Rights Reserved
+              © 2025 Seun Tracker - All Rights Reserved
             </p>
           </div>
 
@@ -419,14 +422,14 @@ export default function Home() {
                 <button onClick={() => scrollToSection('hero')} className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 text-left">Home</button>
                 <button onClick={() => scrollToSection('features')} className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 text-left">Features</button>
                 <button onClick={() => scrollToSection('faqs')} className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 text-left">FAQs</button>
-                <a href="mailto:hello@axiomtracker.com" className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 block">Contact</a>
+                <a href="mailto:hello@seuntracker.com" className="cursor-pointer hover:text-gray-300 hover:translate-x-1 transition-all duration-200 block">Contact</a>
               </div>
             </div>
 
             {/* Contact Us */}
             <div className="flex flex-col gap-6" data-node-id="1715:844">
               <p className="font-semibold text-xl text-white">CONTACT US</p>
-              <a href="mailto:hello@axiomtracker.com" className="font-montserrat font-medium text-lg text-white hover:text-blue-300 hover:underline transition-all duration-200 cursor-pointer">hello@axiomtracker.com</a>
+              <a href="mailto:hello@seuntracker.com" className="font-montserrat font-medium text-lg text-white hover:text-blue-300 hover:underline transition-all duration-200 cursor-pointer">hello@seuntracker.com</a>
             </div>
 
             {/* Legal */}

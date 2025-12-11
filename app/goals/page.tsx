@@ -4,76 +4,67 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Sidebar from '../components/Sidebar';
 
-// Header icons
-const iconNotification = "https://www.figma.com/api/mcp/asset/ded7a757-2476-491a-9144-f622c9a20cd2";
-const iconDropdown = "https://www.figma.com/api/mcp/asset/9d7abf7c-db72-4890-8ebe-89d12f8c8b7b";
-const iconLogout = "https://www.figma.com/api/mcp/asset/e7b2ee4d-0d56-47bd-b57a-c17f490cc555";
+// Header icons (SVG Data URIs)
+const iconNotification = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const iconDropdown = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const iconLogout = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 
-// Page icons
-const iconSearch = "https://www.figma.com/api/mcp/asset/1e0e94bc-c108-4254-9b1d-52818660d321";
-const iconAdd = "https://www.figma.com/api/mcp/asset/52303320-aa98-4c81-82c5-99ef8d190f5a";
-const iconUser = "https://www.figma.com/api/mcp/asset/ca0a3a7f-26f1-430c-922d-6142583ae2bd";
-const iconMoreVertical = "https://www.figma.com/api/mcp/asset/3629d960-4e61-4811-be95-d2b6be794e59";
+// Page icons (SVG Data URIs)
+const iconSearch = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const iconAdd = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 5v14M5 12h14' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const iconUser = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const iconMoreVertical = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='1' fill='black'/%3E%3Ccircle cx='12' cy='5' r='1' fill='black'/%3E%3Ccircle cx='12' cy='19' r='1' fill='black'/%3E%3C/svg%3E";
 
-interface Credential {
+interface Goal {
   id: string;
   name: string;
-  entity: string;
-  entityType: 'Individual' | 'Company';
-  expireIn30Days: number;
-  status: 'Active' | 'Expired';
-  credentialNumber?: string;
-  dateOfIssue?: string;
-  expiryDate?: string;
-  issuingInstitute?: string;
-  state?: string;
-  country?: string;
+  category: string;
+  priority: 'High' | 'Medium' | 'Low';
+  daysRemaining: number;
+  status: 'In Progress' | 'Completed' | 'Overdue';
+  targetValue?: string;
+  startDate?: string;
+  targetDate?: string;
+  motivation?: string;
+  milestones?: string;
 }
 
-// Sample credentials data
-const credentialsData: Credential[] = [
+// Sample goals data
+const goalsData: Goal[] = [
   {
     id: '1',
-    name: 'CT PE License',
-    entity: 'Jeremiah Alalaide',
-    entityType: 'Individual',
-    expireIn30Days: 0,
-    status: 'Active',
-    credentialNumber: '2583 - 7348 - 7483 - 5838',
-    dateOfIssue: '02/09/2023',
-    expiryDate: '02/09/2028',
-    issuingInstitute: 'Engineering Council of New Jersey',
-    state: 'New Jersey',
-    country: 'United States of America',
+    name: 'Read 24 Books',
+    category: 'Personal Development',
+    priority: 'High',
+    daysRemaining: 180,
+    status: 'In Progress',
+    targetValue: '24 Books',
+    startDate: '2024-01-01',
+    targetDate: '2024-12-31',
+    motivation: 'Expand knowledge base',
   },
-  { id: '2', name: 'OH PE License', entity: 'AxiomBlack', entityType: 'Company', expireIn30Days: 0, status: 'Active' },
-  { id: '3', name: 'SBE', entity: 'AxiomBlack', entityType: 'Company', expireIn30Days: 0, status: 'Active' },
-  { id: '4', name: 'PA PE License', entity: 'Jeremiah Alalaide', entityType: 'Individual', expireIn30Days: 0, status: 'Active' },
-  { id: '5', name: 'PA PE License', entity: 'AxiomBlack', entityType: 'Company', expireIn30Days: 0, status: 'Expired' },
-  { id: '6', name: 'PA PE License', entity: 'Jeremiah Alalaide', entityType: 'Individual', expireIn30Days: 0, status: 'Expired' },
-  { id: '7', name: 'PA PE License', entity: 'AxiomBlack', entityType: 'Company', expireIn30Days: 0, status: 'Expired' },
-  { id: '8', name: 'PA PE License', entity: 'Jeremiah Alalaide', entityType: 'Individual', expireIn30Days: 0, status: 'Expired' },
-  { id: '9', name: 'NJ BRC Business', entity: 'Jeremiah Alalaide', entityType: 'Individual', expireIn30Days: 0, status: 'Active' },
+  { id: '2', name: 'Run a Marathon', category: 'Health & Fitness', priority: 'High', daysRemaining: 45, status: 'In Progress', targetValue: '42.2 km', startDate: '2024-03-01', targetDate: '2024-08-15' },
+  { id: '3', name: 'Learn Spanish', category: 'Education', priority: 'Medium', daysRemaining: 365, status: 'In Progress', targetValue: 'B2 Level', startDate: '2024-01-01', targetDate: '2024-12-31' },
+  { id: '4', name: 'Save $10,000', category: 'Finance', priority: 'High', daysRemaining: 200, status: 'In Progress', targetValue: '$10,000', startDate: '2024-01-01', targetDate: '2024-12-31' },
+  { id: '5', name: 'Complete React Course', category: 'Career', priority: 'Medium', daysRemaining: 0, status: 'Overdue', targetValue: '100% Completion', startDate: '2024-05-01', targetDate: '2024-06-01' },
+  { id: '6', name: 'Meditation Habit', category: 'Wellness', priority: 'Low', daysRemaining: 30, status: 'Completed', targetValue: '30 Days Streak', startDate: '2024-01-01', targetDate: '2024-02-01' },
 ];
 
 type Modal = 'add' | 'edit' | 'view' | 'delete' | 'createOwner' | 'createType' | null;
 
 interface FormData {
-  credentialType: string;
-  credentialNumber: string;
-  dateOfIssue: string;
-  expiryDate: string;
-  assignedEmployee: string;
-  certificateExpires: string;
-  issuingInstitute: string;
-  state: string;
-  country: string;
+  goalType: string;
+  targetValue: string;
+  startDate: string;
+  targetDate: string;
+  category: string;
+  motivation: string;
+  milestones: string;
+  priority: 'High' | 'Medium' | 'Low';
   additionalNotes: string;
-  companyName?: string;
-  credentialOwner?: string;
 }
 
-export default function CredentialsPage() {
+export default function GoalsPage() {
   const router = useRouter();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -81,22 +72,21 @@ export default function CredentialsPage() {
   const [statusFilter, setStatusFilter] = useState('All Status');
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [activeModal, setActiveModal] = useState<Modal>(null);
-  const [selectedCredential, setSelectedCredential] = useState<Credential | null>(null);
+  const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
   const [, setToastType] = useState<'success' | 'error'>('success');
   const [showActionMenu, setShowActionMenu] = useState<string | null>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<FormData>({
-    credentialType: '',
-    credentialNumber: '',
-    dateOfIssue: '',
-    expiryDate: '',
-    assignedEmployee: '',
-    certificateExpires: 'Yes',
-    issuingInstitute: '',
-    state: '',
-    country: '',
+    goalType: '',
+    targetValue: '',
+    startDate: '',
+    targetDate: '',
+    category: '',
+    motivation: '',
+    milestones: '',
+    priority: 'Medium',
     additionalNotes: '',
   });
 
@@ -133,27 +123,26 @@ export default function CredentialsPage() {
     };
   }, [userMenuOpen]);
 
-  const filteredCredentials = credentialsData.filter(cred => {
-    const matchesSearch = cred.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter === 'All Status' || cred.status === statusFilter;
+  const filteredGoals = goalsData.filter(goal => {
+    const matchesSearch = goal.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === 'All Status' || goal.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
-  const openModal = (modal: Modal, credential?: Credential) => {
+  const openModal = (modal: Modal, goal?: Goal) => {
     setActiveModal(modal);
-    if (credential) {
-      setSelectedCredential(credential);
+    if (goal) {
+      setSelectedGoal(goal);
       if (modal === 'edit') {
         setFormData({
-          credentialType: credential.name,
-          credentialNumber: credential.credentialNumber || '',
-          dateOfIssue: credential.dateOfIssue || '',
-          expiryDate: credential.expiryDate || '',
-          assignedEmployee: credential.entity,
-          certificateExpires: 'Yes',
-          issuingInstitute: credential.issuingInstitute || '',
-          state: credential.state || '',
-          country: credential.country || '',
+          goalType: goal.name,
+          targetValue: goal.targetValue || '',
+          startDate: goal.startDate || '',
+          targetDate: goal.targetDate || '',
+          category: goal.category,
+          motivation: goal.motivation || '',
+          milestones: goal.milestones || '',
+          priority: goal.priority,
           additionalNotes: '',
         });
       }
@@ -162,18 +151,17 @@ export default function CredentialsPage() {
 
   const closeModal = () => {
     setActiveModal(null);
-    setSelectedCredential(null);
+    setSelectedGoal(null);
     setShowActionMenu(null);
     setFormData({
-      credentialType: '',
-      credentialNumber: '',
-      dateOfIssue: '',
-      expiryDate: '',
-      assignedEmployee: '',
-      certificateExpires: 'Yes',
-      issuingInstitute: '',
-      state: '',
-      country: '',
+      goalType: '',
+      targetValue: '',
+      startDate: '',
+      targetDate: '',
+      category: '',
+      motivation: '',
+      milestones: '',
+      priority: 'Medium',
       additionalNotes: '',
     });
   };
@@ -216,7 +204,7 @@ export default function CredentialsPage() {
               </svg>
             </button>
             <h1 className="font-unbounded font-semibold text-xl md:text-2xl text-black">
-              Certificate/License Management
+              Goal Management
             </h1>
           </div>
 
@@ -300,7 +288,7 @@ export default function CredentialsPage() {
 
                 {showStatusDropdown && (
                   <div className="absolute top-full mt-2 w-full md:w-48 bg-white border border-[#e6e6e6] rounded-lg shadow-lg z-10">
-                    {['All Status', 'Active', 'Expired', 'Expiring in 30 Days'].map((status) => (
+                    {['All Status', 'In Progress', 'Completed', 'Overdue'].map((status) => (
                       <button
                         key={status}
                         onClick={() => {
@@ -325,7 +313,7 @@ export default function CredentialsPage() {
               className="bg-black text-white flex items-center gap-3 px-6 md:px-12 py-3 md:py-4 rounded-xl font-montserrat font-medium text-base hover:bg-gray-900 transition whitespace-nowrap"
             >
               <img src={iconAdd} alt="Add" className="w-5 md:w-6 h-5 md:h-6" />
-              <span>Add New Credentials</span>
+              <span>Set New Goal</span>
             </button>
           </div>
 
@@ -337,16 +325,16 @@ export default function CredentialsPage() {
                   <tr className="bg-[#f1f1f1] border-b border-[#e6e6e6]">
                     <th className="px-4 md:px-6 py-4 md:py-5 text-left">
                       <div className="flex items-center gap-2">
-                        <p className="font-montserrat font-normal text-lg md:text-xl text-black">Credentials</p>
+                        <p className="font-montserrat font-normal text-lg md:text-xl text-black">Goal Name</p>
                       </div>
                     </th>
                     <th className="px-4 md:px-6 py-4 md:py-5 text-left">
                       <div className="flex items-center gap-2">
-                        <p className="font-montserrat font-normal text-lg md:text-xl text-black">Entity Type</p>
+                        <p className="font-montserrat font-normal text-lg md:text-xl text-black">Category & Priority</p>
                       </div>
                     </th>
                     <th className="px-4 md:px-6 py-4 md:py-5 text-left">
-                      <p className="font-montserrat font-normal text-lg md:text-xl text-black">Expire in 30 Days</p>
+                      <p className="font-montserrat font-normal text-lg md:text-xl text-black">Target Value</p>
                     </th>
                     <th className="px-4 md:px-6 py-4 md:py-5 text-left">
                       <p className="font-geist font-normal text-lg md:text-xl text-black">Status</p>
@@ -357,46 +345,47 @@ export default function CredentialsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredCredentials.map((credential) => (
-                    <tr key={credential.id} className="border-b border-[#e6e6e6] hover:bg-gray-50 transition">
+                  {filteredGoals.map((goal) => (
+                    <tr key={goal.id} className="border-b border-[#e6e6e6] hover:bg-gray-50 transition">
                       <td className="px-4 md:px-6 py-4 md:py-5">
-                        <p className="font-montserrat font-medium text-base md:text-lg text-black">{credential.name}</p>
+                        <p className="font-montserrat font-medium text-base md:text-lg text-black">{goal.name}</p>
+                        <p className="text-sm text-gray-500">{goal.daysRemaining} days left</p>
                       </td>
                       <td className="px-4 md:px-6 py-4 md:py-5">
                         <div className="flex items-center gap-3">
                           <img src={iconUser} alt="User" className="w-8 md:w-9 h-8 md:h-9" />
                           <div className="font-montserrat font-normal text-base md:text-lg text-black">
-                            <p>{credential.entity}</p>
-                            <p className="text-sm text-gray-600">({credential.entityType})</p>
+                            <p>{goal.category}</p>
+                            <p className="text-sm text-gray-600">({goal.priority})</p>
                           </div>
                         </div>
                       </td>
                       <td className="px-4 md:px-6 py-4 md:py-5 text-center">
-                        <p className="font-geist font-normal text-base md:text-lg text-black">{credential.expireIn30Days}</p>
+                        <p className="font-geist font-normal text-base md:text-lg text-black">{goal.targetValue}</p>
                       </td>
                       <td className="px-4 md:px-6 py-4 md:py-5">
                         <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-montserrat font-medium text-sm md:text-base ${
-                          credential.status === 'Active'
+                          goal.status === 'Completed'
                             ? 'bg-[#f1fef1] text-[#006500]'
-                            : 'bg-[#ffdddd] text-[#a30000]'
+                            : goal.status === 'Overdue' ? 'bg-[#ffdddd] text-[#a30000]' : 'bg-blue-50 text-blue-700'
                         }`}>
-                          <div className={`w-3 h-3 rounded-full ${credential.status === 'Active' ? 'bg-[#006500]' : 'bg-[#a30000]'}`}></div>
-                          {credential.status}
+                          <div className={`w-3 h-3 rounded-full ${goal.status === 'Completed' ? 'bg-[#006500]' : goal.status === 'Overdue' ? 'bg-[#a30000]' : 'bg-blue-700'}`}></div>
+                          {goal.status}
                         </div>
                       </td>
                       <td className="px-4 md:px-6 py-4 md:py-5 text-center relative">
                         <button
-                          onClick={() => setShowActionMenu(showActionMenu === credential.id ? null : credential.id)}
+                          onClick={() => setShowActionMenu(showActionMenu === goal.id ? null : goal.id)}
                           className="hover:opacity-70 transition"
                         >
                           <img src={iconMoreVertical} alt="Actions" className="w-6 md:w-8 h-6 md:h-8 mx-auto" />
                         </button>
 
-                        {showActionMenu === credential.id && (
+                        {showActionMenu === goal.id && (
                           <div className="absolute right-0 top-full mt-2 w-40 bg-white border border-[#e6e6e6] rounded-lg shadow-lg z-20">
                             <button
                               onClick={() => {
-                                openModal('view', credential);
+                                openModal('view', goal);
                                 setShowActionMenu(null);
                               }}
                               className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 font-montserrat"
@@ -405,7 +394,7 @@ export default function CredentialsPage() {
                             </button>
                             <button
                               onClick={() => {
-                                openModal('edit', credential);
+                                openModal('edit', goal);
                                 setShowActionMenu(null);
                               }}
                               className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 border-t border-[#e6e6e6] font-montserrat"
@@ -414,7 +403,7 @@ export default function CredentialsPage() {
                             </button>
                             <button
                               onClick={() => {
-                                openModal('delete', credential);
+                                openModal('delete', goal);
                                 setShowActionMenu(null);
                               }}
                               className="block w-full text-left px-4 py-2 text-sm text-[#a30000] hover:bg-red-50 border-t border-[#e6e6e6] font-montserrat"
@@ -433,7 +422,7 @@ export default function CredentialsPage() {
             {/* Pagination Footer */}
             <div className="bg-white border-t border-[#e6e6e6] px-4 md:px-6 py-3 md:py-4 flex items-center justify-between flex-wrap gap-4">
               <p className="font-montserrat font-semibold text-sm md:text-base text-gray-700">
-                {filteredCredentials.length} results
+                {filteredGoals.length} results
               </p>
               <div className="flex items-center gap-4">
                 <p className="font-montserrat font-medium text-sm md:text-base text-gray-700">
@@ -462,146 +451,121 @@ export default function CredentialsPage() {
       {/* MODALS */}
 
       {/* Add New Credentials Modal */}
+      {/* Add New Goal Modal */}
       {activeModal === 'add' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 md:p-8">
-              <h2 className="text-2xl font-unbounded font-semibold text-black mb-6">Add New Credentials</h2>
+              <h2 className="text-2xl font-unbounded font-semibold text-black mb-6">Set New Goal</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {/* Credential Owner */}
-                <div>
+                {/* Goal Name */}
+                <div className="md:col-span-2">
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Credential Owner *
-                  </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select Owner</option>
-                    <option>Jeremiah Alalaide</option>
-                    <option>AxiomBlack</option>
-                  </select>
-                  <button className="text-blue-600 text-sm mt-2 flex items-center gap-1 font-montserrat">
-                    + Add New Owner
-                  </button>
-                </div>
-
-                {/* Credential Type */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Credential Type *
-                  </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select Type</option>
-                    <option>CT PE License</option>
-                    <option>OH PE License</option>
-                  </select>
-                  <button className="text-blue-600 text-sm mt-2 flex items-center gap-1 font-montserrat">
-                    + Create New
-                  </button>
-                </div>
-
-                {/* Credential Number */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Credential Number
+                    Goal Name *
                   </label>
                   <input
                     type="text"
-                    value={formData.credentialNumber}
-                    onChange={(e) => setFormData({ ...formData, credentialNumber: e.target.value })}
+                    placeholder="e.g., Read 24 Books"
+                    value={formData.goalType}
+                    onChange={(e) => setFormData({ ...formData, goalType: e.target.value })}
                     className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Certificate Expires */}
+                {/* Target Value */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Certificate Expires?
+                    Target Value
                   </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Yes</option>
-                    <option>No</option>
+                  <input
+                    type="text"
+                    placeholder="e.g., 24 Books / 10kg"
+                    value={formData.targetValue}
+                    onChange={(e) => setFormData({ ...formData, targetValue: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
+                  />
+                </div>
+
+                {/* Priority */}
+                <div>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
+                    Priority
+                  </label>
+                  <select 
+                    value={formData.priority}
+                    onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white"
+                  >
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                   </select>
                 </div>
 
-                {/* Date of Issue */}
+                {/* Start Date */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Date of Issue *
+                    Start Date *
                   </label>
                   <input
                     type="date"
-                    value={formData.dateOfIssue}
-                    onChange={(e) => setFormData({ ...formData, dateOfIssue: e.target.value })}
+                    value={formData.startDate}
+                    onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
                     className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Expiry Date */}
+                {/* Target Date */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Expiry Date *
+                    Target Date *
                   </label>
                   <input
                     type="date"
-                    value={formData.expiryDate}
-                    onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
+                    value={formData.targetDate}
+                    onChange={(e) => setFormData({ ...formData, targetDate: e.target.value })}
                     className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Issuing Institute */}
+                {/* Category */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Issuing Institute
+                    Category
                   </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select Institute</option>
-                    <option>Engineering Council of New Jersey</option>
+                  <select 
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white"
+                  >
+                    <option value="">Select Category</option>
+                    <option value="Personal Development">Personal Development</option>
+                    <option value="Health & Fitness">Health & Fitness</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Career">Career</option>
+                    <option value="Education">Education</option>
                   </select>
                 </div>
 
-                {/* State */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    State
-                  </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select State</option>
-                    <option>New Jersey</option>
-                    <option>Pennsylvania</option>
-                  </select>
-                </div>
-
-                {/* Country */}
+                {/* Motivation */}
                 <div className="md:col-span-2">
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Country
+                    Why is this important? (Motivation)
                   </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select Country</option>
-                    <option>United States of America</option>
-                    <option>Canada</option>
-                  </select>
+                  <textarea
+                    value={formData.motivation}
+                    onChange={(e) => setFormData({ ...formData, motivation: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
+                    rows={2}
+                    placeholder="This goal matters because..."
+                  />
                 </div>
 
-                {/* File Upload */}
+                {/* Additional Notes / Milestones */}
                 <div className="md:col-span-2">
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Upload Credential File
-                  </label>
-                  <div className="border-2 border-dashed border-[#e6e6e6] rounded-lg p-4 text-center">
-                    <button className="px-4 py-2 bg-white border border-[#e6e6e6] rounded text-sm font-montserrat font-medium">
-                      Choose File
-                    </button>
-                    <p className="text-xs font-montserrat text-gray-500 mt-2">No file chosen</p>
-                    <p className="text-xs font-montserrat text-gray-500 mt-1">Note: Only PDF, JPG or PNG files are supported</p>
-                  </div>
-                </div>
-
-                {/* Additional Notes */}
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Additional Notes
+                    Milestones / Notes
                   </label>
                   <textarea
                     value={formData.additionalNotes}
@@ -623,7 +587,7 @@ export default function CredentialsPage() {
                   onClick={handleSaveCredential}
                   className="px-6 py-2 bg-black text-white rounded-lg text-sm font-montserrat font-medium hover:bg-gray-900 transition"
                 >
-                  Save Credentials
+                  Save Goal
                 </button>
               </div>
             </div>
@@ -632,136 +596,118 @@ export default function CredentialsPage() {
       )}
 
       {/* Edit Credentials Modal */}
-      {activeModal === 'edit' && selectedCredential && (
+      {/* Edit Goal Modal */}
+      {activeModal === 'edit' && selectedGoal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 md:p-8">
-              <h2 className="text-2xl font-unbounded font-semibold text-black mb-6">Edit Credentials</h2>
+              <h2 className="text-2xl font-unbounded font-semibold text-black mb-6">Edit Goal</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {/* Credential Owner */}
-                <div>
+                {/* Goal Name */}
+                <div className="md:col-span-2">
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Credential Owner *
-                  </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>{selectedCredential.entity}</option>
-                  </select>
-                </div>
-
-                {/* Credential Type */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Credential Type *
-                  </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>{selectedCredential.name}</option>
-                  </select>
-                </div>
-
-                {/* Credential Number */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Credential Number
+                    Goal Name *
                   </label>
                   <input
                     type="text"
-                    value={formData.credentialNumber}
-                    onChange={(e) => setFormData({ ...formData, credentialNumber: e.target.value })}
-                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-gray-50"
-                  />
-                </div>
-
-                {/* Certificate Expires */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Certificate Expires?
-                  </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Yes</option>
-                    <option>No</option>
-                  </select>
-                </div>
-
-                {/* Date of Issue */}
-                <div>
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Date of Issue *
-                  </label>
-                  <input
-                    type="date"
-                    value={formData.dateOfIssue}
-                    onChange={(e) => setFormData({ ...formData, dateOfIssue: e.target.value })}
+                    value={formData.goalType}
+                    onChange={(e) => setFormData({ ...formData, goalType: e.target.value })}
                     className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Expiry Date */}
+                {/* Target Value */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Expiry Date *
+                    Target Value
                   </label>
                   <input
-                    type="date"
-                    value={formData.expiryDate}
-                    onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
+                    type="text"
+                    value={formData.targetValue}
+                    onChange={(e) => setFormData({ ...formData, targetValue: e.target.value })}
                     className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
                   />
                 </div>
 
-                {/* Issuing Institute */}
+                {/* Priority */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Issuing Institute
+                    Priority
                   </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select Institute</option>
-                    <option>Engineering Council of New Jersey</option>
+                  <select 
+                    value={formData.priority}
+                    onChange={(e) => setFormData({ ...formData, priority: e.target.value as any })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white"
+                  >
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                   </select>
                 </div>
 
-                {/* State */}
+                {/* Start Date */}
                 <div>
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    State
+                    Start Date *
                   </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select State</option>
-                    <option>New Jersey</option>
-                    <option>Pennsylvania</option>
+                  <input
+                    type="date"
+                    value={formData.startDate}
+                    onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
+                  />
+                </div>
+
+                {/* Target Date */}
+                <div>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
+                    Target Date *
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.targetDate}
+                    onChange={(e) => setFormData({ ...formData, targetDate: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
+                  />
+                </div>
+
+                {/* Category */}
+                <div>
+                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
+                    Category
+                  </label>
+                  <select 
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white"
+                  >
+                    <option value="">Select Category</option>
+                    <option value="Personal Development">Personal Development</option>
+                    <option value="Health & Fitness">Health & Fitness</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Career">Career</option>
+                    <option value="Education">Education</option>
                   </select>
                 </div>
 
-                {/* Country */}
+                {/* Motivation */}
                 <div className="md:col-span-2">
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Country
+                    Why is this important? (Motivation)
                   </label>
-                  <select className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat bg-white">
-                    <option>Select Country</option>
-                    <option>United States of America</option>
-                    <option>Canada</option>
-                  </select>
+                  <textarea
+                    value={formData.motivation}
+                    onChange={(e) => setFormData({ ...formData, motivation: e.target.value })}
+                    className="w-full px-4 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat"
+                    rows={2}
+                  />
                 </div>
 
-                {/* File Upload */}
+                {/* Additional Notes / Milestones */}
                 <div className="md:col-span-2">
                   <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Upload Credential File
-                  </label>
-                  <div className="border-2 border-dashed border-[#e6e6e6] rounded-lg p-4 text-center">
-                    <button className="px-4 py-2 bg-white border border-[#e6e6e6] rounded text-sm font-montserrat font-medium">
-                      Choose File
-                    </button>
-                    <p className="text-xs font-montserrat text-gray-500 mt-2">No file chosen</p>
-                    <p className="text-xs font-montserrat text-gray-500 mt-1">Note: Only PDF, JPG or PNG files are supported</p>
-                  </div>
-                </div>
-
-                {/* Additional Notes */}
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-montserrat font-medium text-black mb-2">
-                    Additional Notes
+                    Milestones / Notes
                   </label>
                   <textarea
                     value={formData.additionalNotes}
@@ -783,7 +729,7 @@ export default function CredentialsPage() {
                   onClick={handleSaveCredential}
                   className="px-6 py-2 bg-black text-white rounded-lg text-sm font-montserrat font-medium hover:bg-gray-900 transition"
                 >
-                  Save Credentials
+                  Save Changes
                 </button>
               </div>
             </div>
@@ -791,8 +737,8 @@ export default function CredentialsPage() {
         </div>
       )}
 
-      {/* View Credential Details Modal */}
-      {activeModal === 'view' && selectedCredential && (
+      {/* View Goal Details Modal */}
+      {activeModal === 'view' && selectedGoal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 md:p-8">
@@ -803,82 +749,89 @@ export default function CredentialsPage() {
                 ← Back
               </button>
 
-              <h2 className="text-2xl font-unbounded font-semibold text-black mb-6">{selectedCredential.name}</h2>
+              <h2 className="text-2xl font-unbounded font-semibold text-black mb-2">
+                {selectedGoal.name}
+              </h2>
+              <div className="flex gap-3 mb-6">
+                <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                  selectedGoal.priority === 'High' ? 'bg-red-100 text-red-700' :
+                  selectedGoal.priority === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
+                  'bg-green-100 text-green-700'
+                }`}>
+                  {selectedGoal.priority} Priority
+                </span>
+                <span className="inline-block px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm font-medium">
+                  {selectedGoal.category}
+                </span>
+                <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                   selectedGoal.status === 'Completed' ? 'bg-green-50 text-green-700' :
+                   selectedGoal.status === 'Overdue' ? 'bg-red-50 text-red-700' :
+                   'bg-blue-50 text-blue-700'
+                }`}>
+                  {selectedGoal.status}
+                </span>
+              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <div className="w-full h-40 bg-black rounded-lg mb-4"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-xs font-montserrat font-semibold text-gray-500 mb-1 uppercase tracking-wider">Target Value</p>
+                  <p className="text-lg font-montserrat font-medium text-black">{selectedGoal.targetValue || 'N/A'}</p>
                 </div>
-
-                <div>
-                  <div className="mb-4">
-                    <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Assigned Employees</p>
-                    <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.entity}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Credential Number</p>
-                    <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.credentialNumber || 'N/A'}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Status</p>
-                    <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.status}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Date of Issue</p>
-                    <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.dateOfIssue || 'N/A'}</p>
-                  </div>
-
-                  <div className="mb-4">
-                    <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Expiry Date</p>
-                    <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.expiryDate || 'N/A'}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Remaining Days</p>
-                    <p className="text-sm font-montserrat font-medium text-black">68</p>
-                  </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                   <p className="text-xs font-montserrat font-semibold text-gray-500 mb-1 uppercase tracking-wider">Days Remaining</p>
+                   <p className="text-lg font-montserrat font-medium text-black">{selectedGoal.daysRemaining} Days</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                   <p className="text-xs font-montserrat font-semibold text-gray-500 mb-1 uppercase tracking-wider">Start Date</p>
+                   <p className="text-lg font-montserrat font-medium text-black">{selectedGoal.startDate}</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                   <p className="text-xs font-montserrat font-semibold text-gray-500 mb-1 uppercase tracking-wider">Target Date</p>
+                   <p className="text-lg font-montserrat font-medium text-black">{selectedGoal.targetDate}</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div>
-                  <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Issuing Institute</p>
-                  <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.issuingInstitute || 'N/A'}</p>
+              {selectedGoal.motivation && (
+                <div className="mb-6">
+                  <p className="text-xs font-montserrat font-semibold text-gray-500 mb-2 uppercase tracking-wider">Motivation</p>
+                  <div className="p-4 bg-yellow-50 border border-yellow-100 rounded-lg text-gray-800 italic">
+                    "{selectedGoal.motivation}"
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">State</p>
-                  <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.state || 'N/A'}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Country</p>
-                  <p className="text-sm font-montserrat font-medium text-black">{selectedCredential.country || 'N/A'}</p>
-                </div>
-              </div>
+              )}
 
-              <div className="mb-6">
-                <p className="text-xs font-montserrat font-semibold text-gray-600 mb-1">Additional Notes</p>
-                <p className="text-sm font-montserrat font-medium text-black">No additional notes</p>
-              </div>
+              {selectedGoal.milestones && (
+                <div className="mb-6">
+                  <p className="text-xs font-montserrat font-semibold text-gray-500 mb-2 uppercase tracking-wider">Milestones / Notes</p>
+                  <p className="text-sm font-montserrat text-gray-700 whitespace-pre-wrap">{selectedGoal.milestones}</p>
+                </div>
+              )}
 
-              <button
-                onClick={closeModal}
-                className="px-6 py-2 bg-black text-white rounded-lg text-sm font-montserrat font-medium hover:bg-gray-900 transition"
-              >
-                Close
-              </button>
+              <div className="flex justify-end gap-3 pt-6 border-t border-gray-100">
+                <button
+                  onClick={closeModal}
+                  className="px-6 py-2 border border-[#e6e6e6] rounded-lg text-sm font-montserrat font-medium hover:bg-gray-50"
+                >
+                  Close
+                </button>
+                <button 
+                  onClick={() => openModal('edit', selectedGoal)}
+                  className="px-6 py-2 bg-black text-white rounded-lg text-sm font-montserrat font-medium hover:bg-gray-900"
+                >
+                  Edit Details
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
 
       {/* Delete Confirmation Modal */}
-      {activeModal === 'delete' && selectedCredential && (
+      {activeModal === 'delete' && selectedGoal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-8 max-w-sm text-center">
-            <h2 className="text-xl font-montserrat font-semibold text-black mb-4">Confirm credential deletion</h2>
+            <h2 className="text-xl font-montserrat font-semibold text-black mb-4">Delete this goal?</h2>
+            <p className="text-gray-500 mb-6 text-sm">This action cannot be undone.</p>
             <div className="flex gap-3 justify-center">
               <button
                 onClick={closeModal}
@@ -888,9 +841,9 @@ export default function CredentialsPage() {
               </button>
               <button
                 onClick={handleDeleteCredential}
-                className="px-6 py-2 bg-black text-white rounded-lg text-sm font-montserrat font-medium hover:bg-gray-900 transition"
+                className="px-6 py-2 bg-red-600 text-white rounded-lg text-sm font-montserrat font-medium hover:bg-red-700 transition"
               >
-                Yes
+                Yes, Delete
               </button>
             </div>
           </div>

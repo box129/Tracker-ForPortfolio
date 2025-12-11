@@ -1,6 +1,10 @@
-[00:00:07.727] Server  LOG      ✓ Ready in 5.9s
-[00:00:10.800] Server  LOG      ○ Compiling /dashboard ...
-[00:00:22.567] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:08.647] Server  LOG      ✓ Ready in 5.9s
+[00:00:32.790] Server  LOG      ○ Compiling / ...
+[00:00:53.643] Server  LOG      ○ Compiling /api/auth/[...nextauth] ...
+[00:01:16.014] Server  LOG      ○ Compiling /login ...
+[00:07:59.102] Server  LOG      ✓ Compiled in 469ms
+[00:11:32.277] Server  LOG      ✓ Compiled in 727ms
+[00:12:46.219] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -18,7 +22,7 @@ It can also happen if the client has a browser extension installed which messes 
         <ReplaySsrOnlyErrors>
         <DevRootHTTPAccessFallbackBoundary>
           <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/dashboard" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+            <HTTPAccessFallbackErrorBoundary pathname="/login" notFound={<NotAllowedRootHTTPFallbackError>} ...>
               <RedirectBoundary>
                 <RedirectErrorBoundary router={{...}}>
                   <Head>
@@ -36,4 +40,8 @@ It can also happen if the client has a browser extension installed which messes 
                           >
                   ...
 
-[00:00:25.734] Server  LOG      ○ Compiling /api/auth/[...nextauth] ...
+[00:26:27.427] Server  LOG      ✓ Compiled in 736ms
+[00:33:33.677] Server  LOG      ✓ Compiled in 550ms
+[00:36:49.520] Server  LOG      ✓ Compiled in 339ms
+[00:38:19.479] Server  LOG      ✓ Compiled in 261ms
+[00:42:44.232] Server  LOG      ✓ Compiled in 415ms

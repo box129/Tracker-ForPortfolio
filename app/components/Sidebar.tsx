@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-// Sidebar icons
-const iconLogo = "https://www.figma.com/api/mcp/asset/ef58a6a9-cdb4-47d5-be4a-14a7a3de89e7";
-const iconDashboard = "https://www.figma.com/api/mcp/asset/56421e28-3443-433c-b7ce-c95531f2ca06";
-const iconCredentials = "https://www.figma.com/api/mcp/asset/b7da7900-d7f6-4002-8d91-5c129fa50ae8";
-const iconEntity = "https://www.figma.com/api/mcp/asset/16e94b51-7199-4bc9-a096-df9712ae03c6";
-const iconSettings = "https://www.figma.com/api/mcp/asset/25f47940-a32e-407c-9339-a8eecb18e21b";
+// Sidebar icons (SVG Data URIs)
+const iconLogo = "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3013 25V75L50 100L6.69873 75V25L50 0Z' fill='black'/%3E%3Cpath d='M50 20L75 35V65L50 80L25 65V35L50 20Z' fill='white'/%3E%3C/svg%3E";
+const iconDashboard = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 3h7v7H3V3zm11 0h7v7h-7V3zm0 11h7v7h-7v-7zM3 14h7v7H3v-7z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+const iconGoals = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2l3 6 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1 3-6z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"; // Star for Goals
+const iconHabits = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"; // Calendar for Habits
+const iconSettings = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -18,21 +18,7 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
 
-  const isActive = (path: string) => {
-    if (path === '/dashboard') {
-      return pathname === '/dashboard';
-    }
-    if (path === '/credentials') {
-      return pathname === '/credentials';
-    }
-    if (path === '/entity') {
-      return pathname === '/entity';
-    }
-    if (path === '/settings') {
-      return pathname === '/settings';
-    }
-    return false;
-  };
+  const isActive = (path: string) => pathname.startsWith(path);
 
   return (
     <>
@@ -67,8 +53,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* Logo */}
         <div className="flex flex-col items-center gap-2 pt-10 pb-12 md:pb-16">
-          <img src={iconLogo} alt="Axiom Tracker" className="w-16 md:w-20 h-16 md:h-20" />
-          <p className="font-montserrat font-semibold text-lg md:text-xl text-black">Axiom Tracker</p>
+          <img src={iconLogo} alt="Seun Tracker" className="w-16 md:w-20 h-16 md:h-20" />
+          <p className="font-montserrat font-semibold text-lg md:text-xl text-black">Seun Tracker</p>
         </div>
 
         {/* Navigation Menu */}
@@ -83,36 +69,42 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 : 'text-black hover:bg-gray-50 active:bg-gray-100'
             }`}
           >
-            <img src={iconDashboard} alt="Dashboard" className="w-7 md:w-8 h-7 md:h-8 shrink-0" />
+            <div className={`w-7 md:w-8 h-7 md:h-8 shrink-0 ${isActive('/dashboard') ? 'invert' : ''}`}>
+              <img src={iconDashboard} alt="Dashboard" className="w-full h-full" />
+            </div>
             <span>Dashboard</span>
           </Link>
 
-          {/* Credentials */}
+          {/* Goals (was Credentials) */}
           <Link
-            href="/credentials"
+            href="/goals"
             onClick={onClose}
             className={`flex items-center gap-5 md:gap-6 px-5 md:px-6 py-4 rounded-lg font-geist font-medium text-base md:text-xl transition min-h-[56px] ${
-              isActive('/credentials')
+              isActive('/goals')
                 ? 'bg-black text-white'
                 : 'text-black hover:bg-gray-50 active:bg-gray-100'
             }`}
           >
-            <img src={iconCredentials} alt="Credentials" className="w-7 md:w-8 h-7 md:h-8 shrink-0" />
-            <span>Credentials</span>
+            <div className={`w-7 md:w-8 h-7 md:h-8 shrink-0 ${isActive('/goals') ? 'invert' : ''}`}>
+               <img src={iconGoals} alt="Goals" className="w-full h-full" />
+            </div>
+            <span>Goals</span>
           </Link>
 
-          {/* Entity */}
+          {/* Habits (was Entity) */}
           <Link
-            href="/entity"
+            href="/habits"
             onClick={onClose}
             className={`flex items-center gap-5 md:gap-6 px-5 md:px-6 py-4 rounded-lg font-geist font-medium text-base md:text-xl transition min-h-[56px] ${
-              isActive('/entity')
+              isActive('/habits')
                 ? 'bg-black text-white'
                 : 'text-black hover:bg-gray-50 active:bg-gray-100'
             }`}
           >
-            <img src={iconEntity} alt="Entity" className="w-7 md:w-8 h-7 md:h-8 shrink-0" />
-            <span>Entity</span>
+            <div className={`w-7 md:w-8 h-7 md:h-8 shrink-0 ${isActive('/habits') ? 'invert' : ''}`}>
+              <img src={iconHabits} alt="Habits" className="w-full h-full" />
+            </div>
+            <span>Habits</span>
           </Link>
 
           {/* Settings */}
@@ -125,7 +117,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 : 'text-black hover:bg-gray-50 active:bg-gray-100'
             }`}
           >
-            <img src={iconSettings} alt="Settings" className="w-7 md:w-8 h-7 md:h-8 shrink-0" />
+            <div className={`w-7 md:w-8 h-7 md:h-8 shrink-0 ${isActive('/settings') ? 'invert' : ''}`}>
+              <img src={iconSettings} alt="Settings" className="w-full h-full" />
+            </div>
             <span>Settings</span>
           </Link>
         </nav>

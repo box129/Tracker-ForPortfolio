@@ -4,57 +4,57 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Sidebar from '../components/Sidebar';
 
-// Header icons
-const iconNotification = "https://www.figma.com/api/mcp/asset/ded7a757-2476-491a-9144-f622c9a20cd2";
-const iconDropdown = "https://www.figma.com/api/mcp/asset/9d7abf7c-db72-4890-8ebe-89d12f8c8b7b";
-const iconLogout = "https://www.figma.com/api/mcp/asset/e7b2ee4d-0d56-47bd-b57a-c17f490cc555";
+// Header icons (SVGs)
+const iconNotification = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22ZM18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16ZM16 17H8V11C8 8.52 9.51 6.5 12 6.5C14.49 6.5 16 8.52 16 11V17Z' fill='%23323232'/%3E%3C/svg%3E";
+const iconDropdown = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10L12 15L17 10H7Z' fill='%23323232'/%3E%3C/svg%3E";
+const iconLogout = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z' fill='black'/%3E%3C/svg%3E";
 
-// Quick actions icons
-const iconAddCert = "https://www.figma.com/api/mcp/asset/52303320-aa98-4c81-82c5-99ef8d190f5a";
-const iconUpload = "https://www.figma.com/api/mcp/asset/26a9b5e4-4267-4ead-8dc8-5a2d887ede69";
-const iconSearch = "https://www.figma.com/api/mcp/asset/1e0e94bc-c108-4254-9b1d-52818660d321";
-const iconViewAll = "https://www.figma.com/api/mcp/asset/31865b3c-aa6b-40ae-9586-f0c864b1b7ef";
+// Quick actions icons (SVGs)
+const iconAddGoal = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM17 13H13V17H11V13H7V11H11V7H13V11H17V13Z' fill='%232E7D32'/%3E%3C/svg%3E";
+const iconAddHabit = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.11 21 21 20.1 21 19V5C21 3.9 20.11 3 19 3ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z' fill='%23F57C00'/%3E%3C/svg%3E";
+const iconSearch = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z' fill='%23C62828'/%3E%3C/svg%3E";
+const iconViewAll = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 13H5V3H3V13ZM7 13H9V3H7V13ZM11 13H13V3H11V13ZM15 3V13H17V3H15ZM3 21H5V15H3V21ZM7 21H9V15H7V21ZM11 21H13V15H11V21ZM15 21H17V15H15Z' fill='%236A1B9A'/%3E%3C/svg%3E";
+
+// Activity icons (SVGs)
+const iconActivityGoal = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.4 6L14 4H5V21H7V14H12L12.4 16H19V6H14.4ZM17 14H14L13.6 12H7V6H12L12.4 8H17V14Z' fill='%23000000'/%3E%3C/svg%3E";
+const iconActivityHabit = "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M19 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.11 21 21 20.1 21 19V5C21 3.9 20.11 3 19 3ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z' fill='%23000000'/%3E%3C/svg%3E";
 
 // Dashboard background
-const dashboardBgImage = "https://www.figma.com/api/mcp/asset/4361388a-77b9-4018-a1d9-8fc93116461b";
-
-// Activity icons
-const iconActivityLicense = "https://www.figma.com/api/mcp/asset/54aa23a3-2619-4fc7-a28c-dd34424445f7";
-const iconActivityCert = "https://www.figma.com/api/mcp/asset/5e2ac18d-a852-4f6c-932a-bbbc74e4836b";
+const dashboardBgImage = "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=2000&q=80";
 
 // Sample activity data
 const activities = [
   {
     id: 1,
-    type: 'expiry',
-    title: 'License Expiry Reminder',
-    description: 'Your license "NJ PE License" will expire in 12 days. Renew soon to stay compliant.',
-    time: '6:48PM',
-    icon: iconActivityLicense,
+    type: 'goal_deadline',
+    title: 'Goal Deadline Approaching',
+    description: 'Your goal "Read 24 Books" is 80% complete. Keep going to finish by December 31st.',
+    time: '2h ago',
+    icon: iconActivityGoal,
   },
   {
     id: 2,
-    type: 'added',
-    title: 'New Certificate Added',
-    description: 'Admin added a new certificate: "OH PE License". View details to verify or assign ownership.',
-    time: '6:48PM',
-    icon: iconActivityCert,
+    type: 'new_habit',
+    title: 'New Habit Started',
+    description: 'You started a new habit: "Morning Meditation". Consistency is key!',
+    time: '5h ago',
+    icon: iconActivityHabit,
   },
   {
     id: 3,
-    type: 'expired',
-    title: 'Certificate Auto-Expired',
-    description: 'System automatically marked the certificate "PA PE License 2023" as expired based on the expiry date.',
-    time: '6:48PM',
-    icon: iconActivityCert,
+    type: 'habit_streak',
+    title: '7 Day Streak!',
+    description: 'Congratulations! You have completed "Drink 2L Water" for 7 days in a row.',
+    time: '1d ago',
+    icon: iconActivityHabit,
   },
   {
     id: 4,
-    type: 'renewed',
-    title: 'License Successfully Renewed',
-    description: 'Our license "MBE License" has been successfully updated and marked as Active.',
-    time: '6:48PM',
-    icon: iconActivityLicense,
+    type: 'goal_completed',
+    title: 'Goal Achieved',
+    description: 'You successfully completed the goal "Run a Marathon". Great job!',
+    time: '2d ago',
+    icon: iconActivityGoal,
   },
 ];
 
@@ -66,7 +66,6 @@ export default function DashboardPage() {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
-    // TODO: Implement logout functionality
     router.push('/login');
   };
 
@@ -139,12 +138,12 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-2 md:gap-3.5">
                   {/* Avatar */}
                   <div className="w-10 md:w-14 h-10 md:h-14 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="font-montserrat font-normal text-sm md:text-xl text-black">JA</span>
+                    <span className="font-montserrat font-normal text-sm md:text-xl text-black">AD</span>
                   </div>
                   {/* Name and Role - Hidden on mobile */}
                   <div className="text-left hidden md:block">
-                    <p className="font-montserrat font-medium text-base text-black">Jeremiah Alalade</p>
-                    <p className="font-montserrat font-normal text-sm text-black">Admin</p>
+                    <p className="font-montserrat font-medium text-base text-black">Firstname Lastname</p>
+                    <p className="font-montserrat font-normal text-sm text-black">Seun Tracker</p>
                   </div>
                 </div>
                 {/* Dropdown Arrow */}
@@ -158,11 +157,11 @@ export default function DashboardPage() {
                   <div className="px-6 md:px-8 py-4 md:py-5 border-b border-gray-300">
                     <div className="flex items-center gap-3 md:gap-4">
                       <div className="w-16 md:w-20 h-16 md:h-20 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="font-montserrat font-normal text-white text-sm md:text-base">JA</span>
+                        <span className="font-montserrat font-normal text-white text-sm md:text-base">AD</span>
                       </div>
                       <div>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black">jalalade@axiomblack.com</p>
-                        <p className="font-montserrat font-normal text-xs md:text-sm text-black mt-2 md:mt-3">Admin</p>
+                        <p className="font-montserrat font-normal text-xs md:text-sm text-black">admin@seuntracker.com</p>
+                        <p className="font-montserrat font-normal text-xs md:text-sm text-black mt-2 md:mt-3">Premium User</p>
                       </div>
                     </div>
                   </div>
@@ -193,32 +192,32 @@ export default function DashboardPage() {
               >
                 <div className="absolute inset-0 bg-black/60" />
                 <div className="relative z-10">
-                  <h2 className="font-montserrat font-semibold text-xl md:text-2xl text-white mb-6 md:mb-8">Dashboard Overview</h2>
+                  <h2 className="font-montserrat font-semibold text-xl md:text-2xl text-white mb-6 md:mb-8">Hi, User! Ready to crush your goals?</h2>
 
                   {/* Stats Cards */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                    {/* Total Certificates */}
+                    {/* Total Goals */}
                     <div className="bg-white rounded-lg p-6 lg:p-8 transition-all duration-200 hover:shadow-lg hover:scale-105">
-                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Total Certificates</p>
-                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">42</p>
+                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Total Goals</p>
+                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">12</p>
                     </div>
 
-                    {/* Active */}
+                    {/* Active Habits */}
                     <div className="bg-white rounded-lg p-6 lg:p-8 transition-all duration-200 hover:shadow-lg hover:scale-105">
-                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Active</p>
-                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">35</p>
+                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Active Habits</p>
+                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">5</p>
                     </div>
 
-                    {/* Expiring Soon */}
+                    {/* Completed */}
                     <div className="bg-white rounded-lg p-6 lg:p-8 transition-all duration-200 hover:shadow-lg hover:scale-105">
-                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Expiring Soon (30 Days)</p>
-                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">05</p>
+                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Goals Completed</p>
+                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">3</p>
                     </div>
 
-                    {/* Expired */}
+                    {/* Streak */}
                     <div className="bg-white rounded-lg p-6 lg:p-8 transition-all duration-200 hover:shadow-lg hover:scale-105">
-                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Expired</p>
-                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">02</p>
+                      <p className="font-montserrat font-medium text-sm md:text-base text-black mb-4 md:mb-5">Current Streak</p>
+                      <p className="font-montserrat font-semibold text-3xl md:text-4xl text-black">12 Days</p>
                     </div>
                   </div>
                 </div>
@@ -229,13 +228,12 @@ export default function DashboardPage() {
                 {/* Recent Activities - Wider */}
                 <div className="xl:col-span-2 bg-white border border-[#e6e6e6] rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
                   <div className="flex items-center justify-between mb-6 md:mb-8 flex-wrap gap-3">
-                    <h3 className="font-geist font-semibold text-xl md:text-2xl text-black">Recent Activities</h3>
+                    <h3 className="font-geist font-semibold text-xl md:text-2xl text-black">Recent Activity</h3>
                     <button
                       onClick={() => setShowAllActivities(true)}
                       className="bg-[#f0f0f0] flex items-center gap-2 px-5 md:px-7 py-2 md:py-3 rounded-full hover:bg-gray-200 transition font-geist font-normal text-xs md:text-sm text-black whitespace-nowrap"
                     >
                       See All
-                      <img src={iconViewAll} alt="Arrow" className="w-3 md:w-4 h-3 md:h-4" />
                     </button>
                   </div>
 
@@ -243,16 +241,13 @@ export default function DashboardPage() {
                   <div className="space-y-0">
                     {activities.length === 0 ? (
                       <div className="flex flex-col items-center justify-center py-12 md:py-16">
-                        <div className="w-20 md:w-24 h-20 md:h-24 rounded-full border-2 border-gray-300 flex items-center justify-center mb-3 md:mb-4">
-                          <span className="text-xl md:text-2xl text-gray-400">✕</span>
-                        </div>
-                        <p className="font-montserrat font-semibold text-sm md:text-base text-gray-400">No Recent Activities. Check Back Later.</p>
+                        <p className="font-montserrat font-semibold text-sm md:text-base text-gray-400">No Recent Activities. Get started!</p>
                       </div>
                     ) : (
                       activities.slice(0, 4).map((activity, index) => (
                         <div key={activity.id} className={index < 3 ? 'border-b border-[#e6e6e6]' : ''}>
                           <div className="flex items-start gap-3 md:gap-5 py-4 md:py-5">
-                            <img src={activity.icon} alt={activity.type} className="w-12 md:w-16 h-12 md:h-16 flex-shrink-0 rounded" />
+                            <img src={activity.icon} alt={activity.type} className="w-12 md:w-16 h-12 md:h-16 flex-shrink-0 rounded p-2 bg-gray-50" />
                             <div className="flex-1 min-w-0">
                               <p className="font-montserrat font-semibold text-sm md:text-base text-black">{activity.title}</p>
                               <p className="font-montserrat font-normal text-xs md:text-base text-black mt-1 md:mt-2 line-clamp-2 md:line-clamp-none">{activity.description}</p>
@@ -270,48 +265,54 @@ export default function DashboardPage() {
                   <h3 className="font-unbounded font-medium text-xl md:text-2xl text-black mb-4 md:mb-6">Quick Actions</h3>
 
                   <div className="space-y-2 md:space-y-3">
-                    {/* Add Certificate */}
-                    <div className="bg-white border border-[#dedede] rounded-lg p-3 md:p-4 hover:shadow-md transition cursor-pointer">
+                    {/* Add Goal */}
+                    <div 
+                      onClick={() => router.push('/goals')}
+                      className="bg-white border border-[#dedede] rounded-lg p-3 md:p-4 hover:shadow-md transition cursor-pointer"
+                    >
                       <div className="flex gap-3 md:gap-4">
                         <div className="bg-[#d5ffda] w-14 md:w-16 h-14 md:h-16 rounded flex items-center justify-center flex-shrink-0">
-                          <img src={iconAddCert} alt="Add" className="w-7 md:w-9 h-7 md:h-9" />
+                          <img src={iconAddGoal} alt="Add" className="w-7 md:w-9 h-7 md:h-9" />
                         </div>
                         <div className="min-w-0">
-                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">Add New Certificate/Licenses</p>
-                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">Create a new certificate/license record with issue and expiry details.</p>
+                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">Set New Goal</p>
+                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">Create a new personal or professional goal.</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Upload PDF */}
-                    <div className="bg-white border border-[#dedede] rounded-lg p-3 md:p-4 hover:shadow-md transition cursor-pointer">
+                    {/* Add Habit */}
+                    <div 
+                      onClick={() => router.push('/habits')}
+                      className="bg-white border border-[#dedede] rounded-lg p-3 md:p-4 hover:shadow-md transition cursor-pointer"
+                    >
                       <div className="flex gap-3 md:gap-4">
                         <div className="bg-[#ffedc8] w-14 md:w-16 h-14 md:h-16 rounded flex items-center justify-center flex-shrink-0">
-                          <img src={iconUpload} alt="Upload" className="w-7 md:w-9 h-7 md:h-9" />
+                          <img src={iconAddHabit} alt="Upload" className="w-7 md:w-9 h-7 md:h-9" />
                         </div>
                         <div className="min-w-0">
-                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">Upload License PDF</p>
-                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">Attach your digital license or certification document (PDF format).</p>
+                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">Start New Habit</p>
+                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">Build consistency with daily tracking.</p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Search */}
+                    {/* View Progress */}
                     <div className="bg-white border border-[#dedede] rounded-lg p-3 md:p-4 hover:shadow-md transition cursor-pointer">
                       <div className="flex gap-3 md:gap-4">
                         <div className="bg-[#ffdad5] w-14 md:w-16 h-14 md:h-16 rounded flex items-center justify-center flex-shrink-0">
                           <img src={iconSearch} alt="Search" className="w-7 md:w-9 h-7 md:h-9" />
                         </div>
                         <div className="min-w-0">
-                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">Search Certificates</p>
-                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">Find any certificate instantly by name, number, or owner.</p>
+                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">Check Progress</p>
+                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">Analyze your streaks and completion rates.</p>
                         </div>
                       </div>
                     </div>
 
                     {/* View All */}
                     <div
-                      onClick={() => setShowAllActivities(true)}
+                      onClick={() => router.push('/goals')}
                       className="bg-white border border-[#dedede] rounded-lg p-3 md:p-4 hover:shadow-md transition cursor-pointer"
                     >
                       <div className="flex gap-3 md:gap-4">
@@ -319,8 +320,8 @@ export default function DashboardPage() {
                           <img src={iconViewAll} alt="View All" className="w-7 md:w-9 h-7 md:h-9" />
                         </div>
                         <div className="min-w-0">
-                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">View All</p>
-                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">See the full list of all active, expiring, and expired certificates.</p>
+                          <p className="font-montserrat font-semibold text-xs md:text-sm text-black line-clamp-1">View All Goals</p>
+                          <p className="font-montserrat font-normal text-xs text-black mt-1 md:mt-2 line-clamp-2">See all your active goals and achievements.</p>
                         </div>
                       </div>
                     </div>
@@ -348,7 +349,7 @@ export default function DashboardPage() {
                 {displayedActivities.map((activity, index) => (
                   <div key={activity.id} className={index < displayedActivities.length - 1 ? 'border-b border-[#e6e6e6]' : ''}>
                     <div className="flex items-start gap-3 md:gap-5 py-5 md:py-6">
-                      <img src={activity.icon} alt={activity.type} className="w-12 md:w-16 h-12 md:h-16 flex-shrink-0 rounded" />
+                      <img src={activity.icon} alt={activity.type} className="w-12 md:w-16 h-12 md:h-16 flex-shrink-0 rounded p-2 bg-gray-50" />
                       <div className="flex-1 min-w-0">
                         <p className="font-montserrat font-semibold text-sm md:text-base text-black">{activity.title}</p>
                         <p className="font-montserrat font-normal text-xs md:text-base text-black mt-1 md:mt-2">{activity.description}</p>
@@ -358,12 +359,6 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
-
-              {activities.length > 4 && showAllActivities && (
-                <button className="mt-6 md:mt-8 font-montserrat font-semibold text-sm text-black hover:text-gray-600 transition">
-                  Load More
-                </button>
-              )}
             </div>
           )}
         </main>
